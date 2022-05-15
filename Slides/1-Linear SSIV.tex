@@ -440,6 +440,64 @@ Download at \url{https://github.com/kylebutts/ssaggregate}
 
 \end{frame}
 
+\begin{frame}{Application: ``The China Shock''} 
+ADH study the effects of rising Chinese import competition on US commuting zones, 1991-2000 and 2000-2007
+\smallskip
+	\begin{itemize}
+	\item Treatment $x_\ell$: local growth of Chinese imports  in \$1,000/worker (slightly different from AADHP and ADHS)\smallskip
+	\item Main outcome $y_\ell$: local change in manufacturing emp. share
+	\end{itemize}
+	\pause{}\medskip
+To address endogeneity challenge, use a SSIV $z_{\ell t}=\sum_n s_{\ell nt} g_{nt}$\smallskip
+	\begin{itemize}
+	\item $n$: 397 SIC4 manufacturing industries ($\times$ 2 periods)\smallskip
+	\item $g_{nt}$: growth of Chinese imports in non-US economies per US worker \smallskip
+	\item $s_{\ell nt}$: lagged share of mfg. industry $n$ in \emph{total} emp. of location $\ell$
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{ADH Revisited}
+\vspace{-0.3cm}
+
+ BHJ show how ADH can be seen as leveraging quasi-random shocks\smallskip
+	\begin{itemize}
+	\item \emph{Ex ante} plausible: imagine random industry productivity shocks in China affecting imports in U.S. \& elsewhere
+	\end{itemize}
+\medskip\pause{}
+
+ Evaluate A1 by regional and industry-level balance tests\smallskip
+	\begin{itemize}
+	\item Industry shocks are uncorrelated with observables
+	\end{itemize}
+\medskip\pause{}
+
+ Check sensitivity to adjusting for potential industry-level confounders\smallskip
+	\begin{itemize}
+	\item Control for $w_{\ell t}=\sum_n s_{\ell nt} q_{nt}$, where $q_{nt}$ include period FE, sector FE, the Acemoglu et al. (2016) observables, ...
+	\end{itemize}
+\medskip\pause{}
+
+ Evaluate A2 by studying variation across industries\smallskip
+	\begin{itemize}
+	\item Effective sample size (1/HHI of $s_n$ weights): 58-192\smallskip
+	\item Shocks appear mutually uncorrelated across SIC3 sectors
+	\end{itemize}
+\end{frame} 
+
+\begin{frame}{BHJ do ADH: Shock-Level Balance}
+\begin{center}
+\includegraphics[scale=0.6]{lecture_includes/adh_balance.png}
+\end{center}
+
+No significant correlations between shocks and industry observables, controlling for year fixed effects
+\end{frame}
+
+\begin{frame}{BHJ do ADH: Manufacturing Employment}
+\begin{center}
+\includegraphics[scale=0.4]{lecture_includes/adh_bhj.png}
+\end{center}
+\end{frame}
+
 \section{Share Exogeneity}
 
 \subsection{Motivation}
