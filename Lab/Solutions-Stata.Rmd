@@ -37,19 +37,21 @@ use adh_shares, clear
 merge m:1 industry year using adh_shocks, nogen 
 gen z = ind_share * shock
 collapse (sum) z, by(location year)
-tempfile IV
-save `IV', replace
+quietly tempfile IV
+quietly save `IV', replace
 use adh_noIV, clear
 merge 1:1 location year using `IV', nogen
 
 ```
 
-```{stata, collectcode = T}
-
-/* Basic SSIV and balance */
+```{stata}
+/* Basic SSIV regression */
 ivreg2 y (x=z) post [aw=weight], cluster(state) 
-ivreg2 y_lag (x=z) post [aw=weight], cluster(state) 
+```
 
+```{stata}
+/* Basic balance test */
+ivreg2 y_lag (x=z) post [aw=weight], cluster(state) 
 ```
 
 
@@ -74,10 +76,16 @@ save `sum_shares', replace
 restore
 merge 1:1 location year using `sum_shares', nogen
 summ sum_share
+```
 
+```{stata}
+/* SSIV with Sum of Shares */
 ivreg2 y (x=z) post sum_share [aw=weight], cluster(state) 
-ivreg2 y_lag (x=z) post sum_share [aw=weight], cluster(state) 
+```
 
+```{stata}
+/* Balance test with Sum of Shares */
+ivreg2 y_lag (x=z) post sum_share [aw=weight], cluster(state) 
 ```
 
 *Main IV Estimate:*                      
@@ -93,15 +101,23 @@ ivreg2 y_lag (x=z) post sum_share [aw=weight], cluster(state)
 ```{stata, collectcode = T}
 /* Interact sum of shares with year */
 gen post_sum_share=post*sum_share
-ivreg2 y (x=z) post sum_share post_sum_share [aw=weight], cluster(state) 
-ivreg2 y_lag (x=z) post sum_share post_sum_share [aw=weight], cluster(state) 
+```
 
+```{stata}
+ivreg2 y (x=z) post sum_share post_sum_share [aw=weight], cluster(state) 
+```
+
+```{stata}
+ivreg2 y_lag (x=z) post sum_share post_sum_share [aw=weight], cluster(state) 
+```
+
+
+```{stata}
 /* Check why sum of shares matters */
 preserve
 use adh_shocks, clear
 reg shock year, cluster(industry)
 restore
-
 ```
 
 *Main IV Estimate:*                      
@@ -122,7 +138,13 @@ ssaggregate y x y_lag [aw=weight], ///
 	s(ind_share) sfilename(adh_shares) ///
 	controls("post sum_share post_sum_share") 
 merge 1:1 industry year using adh_shocks, nogen 
+```
+
+```{stata}
 ivreg2 y (x=shock) i.year [aw=s_n], cluster(industry)
+```
+
+```{stata}
 ivreg2 y_lag (x=shock) i.year [aw=s_n], cluster(industry)
 ```
 

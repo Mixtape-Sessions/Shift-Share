@@ -47,8 +47,8 @@ use adh_shares, clear
 merge m:1 industry year using adh_shocks, nogen 
 gen z = ind_share * shock
 collapse (sum) z, by(location year)
-tempfile IV
-save `IV', replace
+quietly tempfile IV
+quietly save `IV', replace
 use adh_noIV, clear
 merge 1:1 location year using `IV', nogen
 ```
@@ -59,12 +59,6 @@ merge 1:1 location year using `IV', nogen
         matched                           573,268  
         -----------------------------------------
 
-
-
-
-    (note: file /var/folders/m3/fzql5frx44nbt7v3j41h6l440000gn/T//S_11543.000001 not found)
-    file /var/folders/m3/fzql5frx44nbt7v3j41h6l440000gn/T//S_11543.000001 saved
-
         Result                           # of obs.
         -----------------------------------------
         not matched                             0
@@ -72,9 +66,8 @@ merge 1:1 location year using `IV', nogen
         -----------------------------------------
 
 ``` stata
-/* Basic SSIV and balance */
+/* Basic SSIV regression */
 ivreg2 y (x=z) post [aw=weight], cluster(state) 
-ivreg2 y_lag (x=z) post [aw=weight], cluster(state) 
 ```
 
     (sum of wgt is     2.0000e+00)
@@ -119,6 +112,11 @@ ivreg2 y_lag (x=z) post [aw=weight], cluster(state)
     Included instruments: post
     Excluded instruments: z
     ------------------------------------------------------------------------------
+
+``` stata
+/* Basic balance test */
+ivreg2 y_lag (x=z) post [aw=weight], cluster(state) 
+```
 
     (sum of wgt is     2.0000e+00)
 
@@ -185,13 +183,10 @@ save `sum_shares', replace
 restore
 merge 1:1 location year using `sum_shares', nogen
 summ sum_share
-
-ivreg2 y (x=z) post sum_share [aw=weight], cluster(state) 
-ivreg2 y_lag (x=z) post sum_share [aw=weight], cluster(state) 
 ```
 
-    (note: file /var/folders/m3/fzql5frx44nbt7v3j41h6l440000gn/T//S_11551.000002 not found)
-    file /var/folders/m3/fzql5frx44nbt7v3j41h6l440000gn/T//S_11551.000002 saved
+    (note: file /var/folders/m3/fzql5frx44nbt7v3j41h6l440000gn/T//S_13044.000002 not found)
+    file /var/folders/m3/fzql5frx44nbt7v3j41h6l440000gn/T//S_13044.000002 saved
 
         Result                           # of obs.
         -----------------------------------------
@@ -202,6 +197,11 @@ ivreg2 y_lag (x=z) post sum_share [aw=weight], cluster(state)
         Variable |        Obs        Mean    Std. Dev.       Min        Max
     -------------+---------------------------------------------------------
        sum_share |      1,444    .2448133    .1418183          0   .7033063
+
+``` stata
+/* SSIV with Sum of Shares */
+ivreg2 y (x=z) post sum_share [aw=weight], cluster(state) 
+```
 
     (sum of wgt is     2.0000e+00)
 
@@ -246,6 +246,11 @@ ivreg2 y_lag (x=z) post sum_share [aw=weight], cluster(state)
     Included instruments: post sum_share
     Excluded instruments: z
     ------------------------------------------------------------------------------
+
+``` stata
+/* Balance test with Sum of Shares */
+ivreg2 y_lag (x=z) post sum_share [aw=weight], cluster(state) 
+```
 
     (sum of wgt is     2.0000e+00)
 
@@ -307,14 +312,12 @@ ivreg2 y_lag (x=z) post sum_share [aw=weight], cluster(state)
 ``` stata
 /* Interact sum of shares with year */
 gen post_sum_share=post*sum_share
-ivreg2 y (x=z) post sum_share post_sum_share [aw=weight], cluster(state) 
-ivreg2 y_lag (x=z) post sum_share post_sum_share [aw=weight], cluster(state) 
+```
 
-/* Check why sum of shares matters */
-preserve
-use adh_shocks, clear
-reg shock year, cluster(industry)
-restore
+\`\`\`\`\`\`
+
+``` stata
+ivreg2 y (x=z) post sum_share post_sum_share [aw=weight], cluster(state) 
 ```
 
     (sum of wgt is     2.0000e+00)
@@ -362,6 +365,10 @@ restore
     Excluded instruments: z
     ------------------------------------------------------------------------------
 
+``` stata
+ivreg2 y_lag (x=z) post sum_share post_sum_share [aw=weight], cluster(state) 
+```
+
     (sum of wgt is     2.0000e+00)
 
     IV (2SLS) estimation
@@ -407,8 +414,13 @@ restore
     Excluded instruments: z
     ------------------------------------------------------------------------------
 
-
-
+``` stata
+/* Check why sum of shares matters */
+preserve
+use adh_shocks, clear
+reg shock year, cluster(industry)
+restore
+```
 
     Linear regression                               Number of obs     =        794
                                                     F(1, 396)         =      52.51
@@ -446,8 +458,6 @@ ssaggregate y x y_lag [aw=weight], ///
     s(ind_share) sfilename(adh_shares) ///
     controls("post sum_share post_sum_share") 
 merge 1:1 industry year using adh_shocks, nogen 
-ivreg2 y (x=shock) i.year [aw=s_n], cluster(industry)
-ivreg2 y_lag (x=shock) i.year [aw=s_n], cluster(industry)
 ```
 
         Result                           # of obs.
@@ -455,6 +465,10 @@ ivreg2 y_lag (x=shock) i.year [aw=s_n], cluster(industry)
         not matched                             0
         matched                               794  
         -----------------------------------------
+
+``` stata
+ivreg2 y (x=shock) i.year [aw=s_n], cluster(industry)
+```
 
     (sum of wgt is     1.0000e+00)
 
@@ -501,6 +515,10 @@ ivreg2 y_lag (x=shock) i.year [aw=s_n], cluster(industry)
     Included instruments: 2000.year
     Excluded instruments: shock
     ------------------------------------------------------------------------------
+
+``` stata
+ivreg2 y_lag (x=shock) i.year [aw=s_n], cluster(industry)
+```
 
     (sum of wgt is     1.0000e+00)
 
