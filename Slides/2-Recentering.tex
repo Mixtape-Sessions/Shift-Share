@@ -11,82 +11,97 @@
 \section{Motivation}
 
 \begin{frame}{Motivation} 
-Many treatments/instruments are SSIV-like: combining multiple sets of variation, w/\bgSun{some} (but not \bgElectricViolet{all}) as-good-as-randomly assigned:
-	\vspace{0.3cm}\pause
-	
-	1. Spatial/network/GE spillover treatments: e.g. the number of neighbors selected for a randomized intervention:  
-	\vspace{0.01cm}\pause
-	\begin{itemize}
-		\item \bgSun{Who got selected for the intervention} \& \bgElectricViolet{who neighbors whom} 
-	\end{itemize}
-	\vspace{0.3cm}\pause
-	
-	2. Regional growth of market access from transportation upgrades:  
-	\vspace{0.01cm}\pause
-	\begin{itemize}
-		\item \bgElectricViolet{Location} + \bgSun{timing of upgrades} \& \bgElectricViolet{location and size of markets}
-	\end{itemize}
-	
-	\vspace{0.3cm}\pause
-	3. An individual's eligibility for a public program, e.g. Medicaid:
-	\vspace{0.01cm}\pause
-	\begin{itemize}
-		\item \bgSun{State-level policy} \& \bgElectricViolet{individual income and demographics}
-	\end{itemize}
-	\vspace{0.3cm}\pause 
-	
-	How can we just leverage the \bgSun{exogenous shocks} to such $z_i$?
+Many treatments/instruments are SSIV-like: combining multiple sets of variation, w/ \bgSun{some} as-good-as-randomly assigned, but not \bgElectricViolet{all}:
+
+\pause
+\begin{enumerate}
+  \item Spatial/network/GE spillover treatments: e.g. the number of neighbors selected for a randomized intervention:\pause
+
+  \bgSun{Who got selected for the intervention} \& \bgElectricViolet{who neighbors whom} 
+
+  \smallskip\pause
+  \item Regional growth of market access from transportation upgrades:\pause
+
+  \bgElectricViolet{Location} + \bgSun{timing of upgrades} \& \bgElectricViolet{location and size of markets}
+
+  \smallskip\pause
+  \item An individual's eligibility for a public program, e.g. Medicaid:\pause
+
+  \bgSun{State-level policy} \& \bgElectricViolet{individual income and demographics}
+\end{enumerate}
+
+\bigskip\pause
+How can we just leverage the \bgSun{exogenous shocks} to such $z_i$?
 \end{frame}
 
 \begin{frame}{Borusyak and Hull (BH, 2022) Key Points}
+  
+  {\small 
+  \vspace{-3mm}
 	\begin{enumerate}
-		\vspace{0.05cm}
-	\item \bgElectricViolet{Non-random exposure} to \bgSun{exogenous shocks} generates systematic variation which can lead to omitted variable bias\pause 
-		\vspace{0.05cm}
-		\begin{itemize}
-		\item Randomizing roads $\not\Rightarrow$ random market access growth from them\pause 
-		\end{itemize}
-	\vspace{0.25cm}
+
+	\item \bgElectricViolet{Non-random exposure} to \bgSun{exogenous shocks} generates systematic variation which can lead to omitted variable bias. \pause 
+  
+  \vspace{-2mm}
+  \begin{itemize}
+    \item Randomizing roads $\not\Rightarrow$ random market access growth from them\pause 
+  \end{itemize}
+
 	\item The systematic variation can be removed via novel ``recentering''\pause 
-		\vspace{0.05cm}
+
+    \vspace{-2mm}
 		\begin{itemize}
 		\item Specify many counterfactual sets of \bgSun{shocks} 
-		\vspace{0.1cm}\pause 
-		\item Compute $\mu_i$, the average $z_i$ across counterfactuals, by simulation \\ \pause{}\emph{--- the key confounder (similar to a propensity score)}
-		\vspace{0.1cm}\pause 
+    
+    \pause 
+		\item Compute $\mu_i$, the average $z_i$ across counterfactuals, by simulation \\ \pause\emph{--- the key confounder (similar to a propensity score)}
+    
+    \pause 
 		\item ``Recenter'' $z_i$ by $\mu_i$ (i.e. instrument with $\tilde{z}_i=z_i-\mu_i$) or control for $\mu_i$ 
-		\vspace{0.1cm}\pause 
+    
+    \pause 
 		\item Conventional solutions (e.g. directly instrumenting with shocks or controlling for all features of exposure) are often infeasible 		
 		\end{itemize}
-	\vspace{0.25cm}\pause 
+
+  \pause 
 	\item Recentering solution also can have attractive efficiency properties
-		\begin{itemize}
-		\item Leverages \bgElectricViolet{non-random exposure} to best predict shock effects
+    \vspace{-2mm}
+    \begin{itemize}
+	  	\item Leverages \bgElectricViolet{non-random exposure} to best predict shock effects
 		\end{itemize}
 	\end{enumerate}
+  }
 \end{frame}
 
 
 \begin{frame}{(Some) Other Settings where these Points are Relevant}
-	\begin{itemize}
-	\item Linear shift-share IV {\color{gray}(Autor et al. 2013, Borusyak et al. 2022)}
-	\vspace{0.2cm}
-	\item Nonlinear shift-share IV {\color{gray}(Boustan et al. 2013, Berman et al. \phantom{Z}2015, Chodorow-Reich and Wieland 2020, Derenoncourt 2021)} 
-	\vspace{0.2cm}
-	\item IV based on centralized school assignment mechanisms \\{\color{gray}\phantom{ZZZ}(Abdulkadiro\u{g}lu et al. 2017, 2019, Angrist et al. 2020)}
-	\vspace{0.2cm}
-	\item Model-implied optimal IV {\color{gray}(Ad\~{a}o-Arkolakis-Esposito 2021)}
-	\vspace{0.2cm}
-	\item Weather instruments {\color{gray}(Gomez et al. 2007, Madestam et al. 2013)}%
+  
+{\small
+Linear shift-share IV {\small\color{gray}(Autor et al. 2013, Borusyak et al. 2022)}
+	
 \vspace{0.2cm}
-	\item ``Free space'' instruments for mass media access {\color{gray}(Olken 2009, \phantom{ZZZ}Yanagizawa-Drott 2014)}
-	\end{itemize}	
+Nonlinear shift-share IV {\small\color{gray}(Boustan et al. 2013, Berman et al. \phantom{Z}2015, Chodorow-Reich and Wieland 2020, Derenoncourt 2021)} 
+	
+\vspace{0.2cm}
+IV based on centralized school assignment mechanisms {\small\color{gray}(Abdulkadiro\u{g}lu et al. 2017, 2019, Angrist et al. 2020)}
+
+\vspace{0.2cm}
+Model-implied optimal IV {\small\color{gray}(Ad\~{a}o-Arkolakis-Esposito 2021)}
+
+\vspace{0.2cm}
+Weather instruments {\small\color{gray}(Gomez et al. 2007, Madestam et al. 2013)}%
+
+\vspace{0.2cm}
+``Free space'' instruments for mass media access {\small\color{gray}(Olken 2009, Yanagizawa-Drott 2014)}
+
+}
 \end{frame}
 
 \section{Intuition}
 
 \subsection{Market Access Effects}
 \begin{frame}{Example 1: Market Access Effects via RCT} 
+\vspace{-0.3cm}
 Theory suggests transportation upgrades affect local outcomes (e.g. land value) of regions $i$ by increasing their market access (MA): 
 
 \vspace{-0.7cm}
@@ -100,15 +115,15 @@ for {\color<3->{sun} road network $g_t$} in periods $t=1,2$, {\color<5->{electri
 
 \vspace{0.2cm}\pause 
 
-Imagine an experiment randomly connecting adjacent regions by road\pause \pause{}
-\vspace{0.1cm}
+Imagine an experiment randomly connecting adjacent regions by road\pause \pause
+
 \begin{itemize}
 	\item MA only grows because of the random transportation shocks
-	\vspace{0.1cm}
+
 	\item So can we view variation in MA growth as random and just run OLS? % like in an RCT
 \end{itemize}
 
-\vspace{0.2cm}\pause
+\pause
 No. Randomizing roads $\not\Rightarrow$ randomizing $MA$ due to them!
 \end{frame}
 
@@ -219,16 +234,20 @@ Standard ``simulated instruments'' solution (Currie and Gruber (1996)): \\ use s
 Consider the effects of individual eligilibity $x_i$ for Medicaid:
 $$y_i=\beta x_i+\varepsilon_i$$ 
 where $x_i$ is determined by $i$'s state policy ${\color{sun}g}{}_{\color{electric-violet}\text{state}_i}$ and {\color{electric-violet}demographics}\pause
-\vspace{0.3cm}\pause
+
+\pause
 The BH approach:
 \vspace{0.05cm}
 	\begin{itemize}
 	\item Formalize the policy experiment as ``all permutations of $\color{sun}g$ across states are equally likely''
-	\vspace{0.1cm}\pause
+  
+  \pause
 	\item Compute $\mu_i$ = the share of states in which $i$ would be eligible
-	\vspace{0.1cm}\pause
+  
+  \pause
 	\item Leverage all variation in $x_i$ but recenter by $\mu_i$ (or control for $\mu_i$)
-	\vspace{0.1cm}\pause
+  
+  \pause
 	\item Yields efficiency gain by better first-stage prediction, e.g. by removing $i$ who are always or never eligible 
 	\end{itemize}
 \end{frame}
@@ -243,15 +262,25 @@ We have a model of $y_i=\beta x_i+\varepsilon_i $ for a fixed population $i=1\do
 \item In BH: extensions to heterogeneous effects, other controls, multiple treatments, nonlinear outcome models, panel data...
 \end{itemize}
 
-\pause\vspace{0.2cm}
+\pause
 We have a candidate instrument $z_i = f_i ({\color{sun}g},{\color{electric-violet}w})$, where {\color{sun} $g$} is a vector of shocks; {\color{electric-violet} $w$} collects predetermined variables; $f_i(\cdot)$ are known mappings 
 	\begin{itemize}
 	\item Applies to any $z_i$ which can be constructed from observed data
 	\item Nests reduced-form regressions: $x_i=z_i$
 	\item Allows ${\color{sun} g}=({\color{sun} g_1},\dots,{\color{sun} g_K})$ to vary at a different level than $i$
 	\end{itemize}
+\end{frame}
 
-\pause\vspace{0.2cm}
+\begin{frame}{General Setup}
+\vspace{-0.2cm}
+We have a model of $y_i=\beta x_i+\varepsilon_i $ for a fixed population $i=1\dots N$
+\begin{itemize}
+\item In BH: extensions to heterogeneous effects, other controls, multiple treatments, nonlinear outcome models, panel data...
+\end{itemize}
+
+We have a candidate instrument $z_i = f_i ({\color{sun}g},{\color{electric-violet}w})$, where {\color{sun} $g$} is a vector of shocks; {\color{electric-violet} $w$} collects predetermined variables; $f_i(\cdot)$ are known mappings 
+
+\medskip
 \textbf{Assumptions}:
 	\begin{enumerate}
 	\item Shocks are exogenous: ${\color{sun}g} \perp \varepsilon \mid {\color{electric-violet} w}$
@@ -320,10 +349,11 @@ We have a candidate instrument $z_i = f_i ({\color{sun}g},{\color{electric-viole
 Add controls (province FE, longitude, etc...)
 \vspace{0.05cm}
 	\begin{itemize}
-	\item Hard to justify \emph{ex ante} since MA is a constructed variable 
+	\item Hard to justify \emph{ex ante} since MA is a variable constructed based on a structural model
 	\vspace{0.1cm}
 	\item No experimental analog
 	\end{itemize}
+
 \vspace{0.4cm}\pause
 Find valid contrasts for \emph{one} source of variation---a natural experiment
 \vspace{0.05cm}
@@ -391,21 +421,19 @@ Find valid contrasts for \emph{one} source of variation---a natural experiment
 \vspace{0.1cm}
 	\begin{itemize}
 	\item 19 of 43 states with low Medicaid coverage expanded to 138\% FPL
-	\vspace{0.1cm}
+
 	\item View \bgSun{expansion decisions} as random across states with same-party governors, but not \bgElectricViolet{household demographics} or \bgElectricViolet{pre-2014 policy}
-	\vspace{0.1cm}
+
 	\item Outcomes: Medicaid takeup and private insurance crowdout
 \end{itemize}
-
-\vspace{0.2cm}\pause
+\pause
 We compare two estimators, both valid under the same assumptions:
 \begin{itemize}
-	\vspace{0.1cm}
 	\item Simulated IV: use state-level variation only (i.e. expansion dummy)
-	\vspace{0.1cm}
 	\item Recentered IV: predict eligibility from expansion decisions \& non-random demographics, and recenter
-	\end{itemize}\pause{}
-\vspace{0.2cm}
+\end{itemize}
+
+\pause
 Via non-random variation, recentered IV has $\approx 3$ times smaller SEs
 \end{frame}
 
@@ -419,14 +447,14 @@ Via non-random variation, recentered IV has $\approx 3$ times smaller SEs
 
 \section{Concluding Thoughts}
 \begin{frame}{Conclusions}
-In both linear SSIV and more elaborate settings, the most important thing is to decide \emph{ex ante} what identifying variation you want to use\smallskip\pause{}
+In both linear SSIV and more elaborate settings, the most important thing is to decide \emph{ex ante} what identifying variation you want to use\smallskip\pause
 \begin{itemize}
-\item When leveraging a natural experiment, recentering (e.g. controlling for sum-of-shares, in linear SSIV) can help\smallskip\pause{}
+\item When leveraging a natural experiment, recentering (e.g. controlling for sum-of-shares, in linear SSIV) can help\smallskip\pause
 \item Non-experimental assumptions (e.g. parallel trends) typically require other approaches \smallskip
 \item The source of variation can guide inference considerations
-\end{itemize}\medskip\pause{}
+\end{itemize}\medskip\pause
 
-After deciding + appropriately adjusting the analysis, try to falsify the identifying variation (\emph{ex post}) -- via balance or pre-trend tests\bigskip\pause{}
+After deciding + appropriately adjusting the analysis, try to falsify the identifying variation (\emph{ex post}) -- via balance or pre-trend tests\bigskip\pause
 
 Much more work to be done on the various econometrics here!
 \end{frame}
@@ -441,7 +469,7 @@ Good luck on your future adventures with SSIV!
 \url{peter_hull@brown.edu}
 
 \bigskip
- \url{@instrumenthull}
+\url{@instrumenthull}
 \end{center}
 \end{frame}
 
