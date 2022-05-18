@@ -54,7 +54,9 @@ One 45-minute coding lab
 \end{frame}
 
 \begin{frame}{Schedule}
+\vspace*{\fill}
 \includegraphics[scale=0.52]{./lecture_includes/schedule.png}
+\vspace*{\fill}
 \end{frame}
 
 \subsection{(Linear) SSIV}
@@ -199,15 +201,17 @@ Autor, Dorn, and Hanson (2013, ADH):
 
 Hummels et al. (2014) on offshoring: 
 	\begin{itemize}
+	\item $\beta$ = effect of imports on wages
 	\item $x_\ell$ = imports by Danish firm $\ell$, $y_\ell$ = wages
 	\item $\sun{g_n}$ = changes in transport costs by $n = \text{(product, country)}$
 	\item $\electricViolet{s_{\ell n}}$ = lagged import shares
+	\item $z_\ell$ = predicted change in firm inputs via transport costs
 	\end{itemize}
 \end{frame}
 
 \begin{frame}{What Do We Do With This?}
 
-Of course we can always run IV with such $z_\ell$ ... but what does the corresponding estimand \emph{identify}?
+Of course, we can always run IV with such $z_\ell$ ... but what does the corresponding estimand \emph{identify}?
 \bigskip\pause
 
 Recall IV validity condition: $E\left[\frac{1}{L}\sum_\ell z_\ell \varepsilon_\ell\right]=0$ for model residual $\varepsilon_\ell$\smallskip
@@ -220,7 +224,7 @@ What properties of shocks and shares make this condition hold?
 \smallskip
 \begin{itemize}
 \item Is SSIV like a natural experiment? A diff-in-diff? Something new?
-\item Since $z_\ell$ combines multiple sources of variation, it can be difficult to think about it being randomly assigned across $\ell$...
+\item Since $z_\ell$ combines multiple sources of variation, it can be difficult to think about it being randomly assigned across $\ell$ (unlike a lottery IV)
 \end{itemize}
 \end{frame}
 
@@ -297,19 +301,14 @@ Spillovers across different industries are likely important:
 	\item When employment  shrinks in industry $n$ after a negative shock, aggregate employment may or may not respond
 	\pause\smallskip
 	\item In a flexible labor market, comparing wages of similar workers across industries does not make sense
-	%\pause\smallskip
-	%\item NILF: not well-defined at the industry level % KB maybe take out of here, somewhat distinct
-	\pause\medskip
 	\end{itemize}
 
 \end{frame}
 
 \begin{frame}{Problem 2: GE Spillovers}
 
-ADH Solution: specify the outcome equation for local labor markets %instead of industries% KB here can connect to two-tier randomization in devt?
+ADH Solution: specify the outcome equation for local labor markets 
 \begin{itemize}
-%	\item To have many observations, compare \emph{local} labor market markets
-%	\pause\smallskip
 \item Works if local economies are isolated ``islands'' \\(simple model in Adao-Kolesar-Morales 2019; richer structure of spatial spillovers in Adao-Arkolakis-Esposito 2020)
 \pause\medskip
 \end{itemize}
@@ -340,7 +339,6 @@ E.g. $g_n= \Delta IPO_{n}$ aggregated w/mfg employment shares $s_{\ell n}$\small
 \begin{itemize}
 \item Can we leverage a natural experiment in $g_n$, as before?
 \end{itemize}
-\medskip\pause
 \end{frame}
 
 \begin{frame}{Leveraging $g_n$}{Shift-Share Estimand}
@@ -348,7 +346,7 @@ E.g. $g_n= \Delta IPO_{n}$ aggregated w/mfg employment shares $s_{\ell n}$\small
 Consider the SSIV estimator of $y_\ell=\beta x_\ell+\gamma'w_\ell+\varepsilon_\ell$ instrumented by $z_\ell=\sum_n s_{\ell n}g_n$ and, for now, $\sum_n s_{\ell n}=1$ for all $\ell$
 
 \vspace{5mm}
-First step: note that by the FWL thm. the estimator can be written
+First step: note that by the FWL thm., the estimator can be written
 \begin{align*}
 \hat{\beta}=\frac{\sum_\ell z_\ell y_\ell^\perp}{\sum_\ell z_\ell x_\ell^\perp}=\frac{\sum_\ell \sum_n s_{\ell n}g_n y_\ell^\perp}{\sum_\ell \sum_n s_{\ell n}g_n x_\ell^\perp}
 \end{align*}
@@ -367,7 +365,7 @@ shock-level IV procedure that uses $g_n$ to instrument for a shock-level ``aggre
 \end{align*}
 
 \vspace{2.5mm}
-where $s_n=\frac{1}{L}\sum_\ell s_{\ell n}$ are weights capturing the average importance of shock $n$, and $\bar{v}_n=\frac{\sum_\ell s_{\ell n} v_\ell}{\sum_\ell s_{\ell n}}$ is an exposure-weighted average of $v_\ell$\medskip\pause
+where $s_n=\frac{1}{L}\sum_\ell s_{\ell n}$ are weights capturing the average importance of shock $n$, and $\bar{v}_n=\frac{\sum_\ell s_{\ell n} v_\ell}{\sum_\ell s_{\ell n}}$ is an exposure-weighted average of $v_\ell$
 \end{frame}
 
 
@@ -467,7 +465,7 @@ So far we have assumed a constant sum-of-shares: $S_\ell\equiv\sum_n s_{\ell n}=
 \end{itemize}
 
 
-E.g. in ADH, Comparing locations with larger and smaller $z_\ell$ could be comparing places with larger manufacturing employment (Midwest vs. South)
+E.g. in ADH, Comparing locations with larger and smaller $z_\ell$ could be comparing places with larger vs. smaller manufacturing employment (e.g. Midwest vs. South)
 
 \end{frame}
 
@@ -477,29 +475,30 @@ $$
 z_\ell = \sum_n s_{\ell n}\left(\mu+(g_n-\mu)\right) = \mu S_\ell + \underbrace{\sum_n s_{\ell n}(g_n-\mu)}_{\text{Clean Shock Variation}}
 $$
 
-Controlling for the sum-of-shares $S_\ell$ isolates clean shock variation\smallskip
+Controlling for the sum-of-shares $S_\ell$ isolates clean shock variation\smallskip\pause{}
 
 \begin{itemize}
-\item Further controls are needed when \textbf{A1} only holds conditional on $q_n$; \\ e.g. in panels, $S_\ell$ should be interacted with time FE
+\item Further controls are needed when \textbf{A1} only holds conditional on $q_n$; \\ e.g. in panels, $S_\ell$ should be interacted with time FE:
 \end{itemize}
+$$
+z_{\ell t} = \sum_n s_{\ell n}\left(\mu_t+(g_{nt}-\mu_t)\right) = \mu_t S_\ell + \underbrace{\sum_n s_{\ell n}(g_{nt}-\mu_t)}_{\text{Clean Shock Variation}}
+$$
 \end{frame}
 
 \begin{frame}{Practical Consideration 2: Exposure Clustering}{The Problem}
+\vspace{-0.3cm}
 Ad\~{a}o, Kolesar, and Morales (2019) study a novel inference challenge when SSIV identification leverages quasi-random shocks \smallskip
 
 \begin{itemize}
-\item Observations with similar shares $s_{\ell 1,},\dots,s_{\ell N}$ are likely to have correlated $z_\ell$, even when observations are not ``clustered'' in conventional ways (e.g. by distance)\smallskip
+\item Observations with similar shares $s_{\ell 1,},\dots,s_{\ell N}$ are likely to have correlated $z_\ell$, even when observations are not ``clustered'' in conventional ways (e.g. by distance)\smallskip\pause{}
 
 \item When $\varepsilon_\ell$ is similarly clustered (e.g. when $\varepsilon_\ell=\sum_n s_{\ell n}\nu_n +\tilde{\varepsilon}_\ell$), large-sample distribution of $\hat{\beta}$ may not be well-approximated by standard central limit theorems (CLTs)
 \end{itemize}
-\end{frame}
-
-\begin{frame}{Practical Consideration 2: Exposure Clustering}{The Solution}
-Ad\~{a}o, Kolesar, and Morales then derive a new CLT + SEs to address ``exposure clustering''\medskip
+\medskip\pause{}
+They then derive a new CLT + SEs to address ``exposure clustering''\medskip
 \begin{itemize}
 \item ``Design-based'': leverage \emph{iid}ness of shocks, not observations
 \end{itemize}
-\pause\bigskip
 \end{frame}
 
 \begin{frame}{Practical Consideration 2: Exposure Clustering}{The Solution}
@@ -640,6 +639,9 @@ E[\varepsilon_\ell\mid s_{\ell n}]=0,\text{ }\forall n \pause\implies E[\sum_\el
 \end{align*}
 
 This is $N$ moment conditions at the level of observations, e.g. 38 for Card and 397 for ADH (vs. just 1 in BHJ, at the level of industries)
+\bigskip
+
+In other words, GPSS show that the SSIV estimator can be seen as pooling many Boatlift-style diff-in-diff IVs, one for each industry
 
 \end{frame}
 
