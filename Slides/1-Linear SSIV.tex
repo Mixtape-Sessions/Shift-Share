@@ -1,10 +1,14 @@
-\documentclass{beamer}
+\documentclass[t]{beamer}
 
 \input{preamble.tex}
 
-
-
 \begin{document}
+
+% Adjust spacing with equations
+\setlength{\abovedisplayskip}{5pt}
+\setlength{\belowdisplayskip}{5pt}
+\setlength{\abovedisplayshortskip}{5pt}
+\setlength{\belowdisplayshortskip}{5pt}
 
 \imageframe{./lecture_includes/cover.png}
 
@@ -57,36 +61,48 @@ One 45-minute coding lab
 \begin{frame}{What is a (Linear) SSIV?}
 
 A weighted sum of a common set of \bgSun{shocks}, with weights reflecting heterogeneous \bgElectricViolet{exposure shares}:\hspace{0.25cm} $z_\ell=\sum_{n} \electricViolet{s_{\ell n}} \sun{g_n}$
-\pause{}
+\pause
 
 \begin{itemize}
 \item The shocks vary at a different ``level''  \bgSun{$n=1,\dots,N$} than the shares \bgElectricViolet{$\ell=1,\dots,L$}, where we also observe an outcome $y_\ell$ \& treatment $x_\ell$
-\end{itemize}\pause{}\medskip
+\end{itemize}\pause\medskip
 
 We want to use $z_\ell$ to estimate parameter $\beta$ of the model $y_\ell=\beta x_\ell+\varepsilon_\ell$
-\pause{}
+\pause
 \begin{itemize}\itemsep0em
 \item Could be a ``structural'' equation or a potential outcomes model
 \item Could be misspecified, with heterogeneous treatment effects $\beta_\ell$
 \item Could be a ``reduced form'' analysis, with $x_\ell=z_\ell$
 \item Could have other included controls $w_\ell$ 
 \end{itemize}
-\pause{}\medskip
+\pause\medskip
 
 Key question: under what assumptions does this SSIV strategy ``work''?
 \end{frame}
 
 \begin{frame}{SSIV Examples}
-\begin{itemize}
-\item Instrument $z_\ell=\sum_{n} \electricViolet{s_{\ell n}} \sun{g_n}$ for model $y_\ell=\beta x_\ell+\gamma'w_\ell+\varepsilon_\ell$\smallskip
-	\begin{itemize}
-	\item  $\electricViolet{s_{\ell n}}\in[0,1]$ are the \bgElectricViolet{\emph{exposure shares}}; often $\sum_n \electricViolet{s_{\ell n}}=1$ 
-	\smallskip
-	\item $\sun{g_n}$ are the \bgSun{\emph{shocks}} (or ``shifters'')
-	\end{itemize}
-	\bigskip\pause{}
 
-\item Bartik (1991); Blanchard and Katz (1992): 
+\vspace*{-10mm}
+\begin{equation*}
+  \text{Instrument }
+  z_\ell = \sum_{n}
+  \tikz[baseline]{
+      \node[draw=electric-violet,rounded corners,anchor=base] (m1)
+      {$\electricViolet{s_{\ell n}}$};
+      \node[above = 1mm of m1] (l1) {\small\color{electric-violet} shares};
+      \draw[-,electric-violet] (l1) -- (m1);
+  }
+  \tikz[baseline]{
+      \node[draw=sun,rounded corners,anchor=base] (m2)
+      {$\sun{g_n}$};
+      \node[above = 1mm of m2] (l2) {\small\color{sun} shocks};
+      \draw[-,sun] (l2) -- (m2);
+  }
+  \text{ for model }
+  y_\ell = \beta x_\ell + \gamma' w_\ell + \varepsilon_\ell
+\end{equation*}
+  
+Bartik (1991); Blanchard and Katz (1992): 
 	\begin{itemize}
 	\item $\beta$ = inverse local labor supply elasticity 
 	\item $x_\ell$ and $y_\ell$ = employment and wage growth in region $\ell$ 
@@ -95,20 +111,31 @@ Key question: under what assumptions does this SSIV strategy ``work''?
 	\item $\electricViolet{s_{\ell n}}$ = lagged employment shares (of industry in a region)
 	\item $z_\ell$ = predicted employment growth due to national industry trends
 	\end{itemize}
-\end{itemize}
 \end{frame}
 
 \begin{frame}{SSIV Examples}
-\begin{itemize}
-\item Instrument $z_\ell=\sum_{n} \electricViolet{s_{\ell n}} \sun{g_n}$ for model $y_\ell=\beta x_\ell+\gamma'w_\ell+\varepsilon_\ell$\smallskip
-	\begin{itemize}
-	\item  $\electricViolet{s_{\ell n}}\in[0,1]$ are the \bgElectricViolet{\emph{exposure shares}}; often $\sum_n \electricViolet{s_{\ell n}}=1$ 
-	\smallskip
-	\item $\sun{g_n}$ are the \bgSun{\emph{shocks}} (or ``shifters'')
-	\end{itemize}
-	\bigskip
 
-\item Autor, Dorn, and Hanson (2013, ADH):
+\vspace*{-10mm}
+\begin{equation*}
+  \text{Instrument }
+  z_\ell = \sum_{n}
+  \tikz[baseline]{
+      \node[draw=electric-violet,rounded corners,anchor=base] (m1)
+      {$\electricViolet{s_{\ell n}}$};
+      \node[above = 1mm of m1] (l1) {\small\color{electric-violet} shares};
+      \draw[-,electric-violet] (l1) -- (m1);
+  }
+  \tikz[baseline]{
+      \node[draw=sun,rounded corners,anchor=base] (m2)
+      {$\sun{g_n}$};
+      \node[above = 1mm of m2] (l2) {\small\color{sun} shocks};
+      \draw[-,sun] (l2) -- (m2);
+  }
+  \text{ for model }
+  y_\ell = \beta x_\ell + \gamma' w_\ell + \varepsilon_\ell
+\end{equation*}
+
+Autor, Dorn, and Hanson (2013, ADH):
 	\begin{itemize}
 	\item $x_\ell$ = growth of import competition in region $\ell$
 	\item $y_\ell$ = growth of manuf. employment, unemployment, etc.\smallskip
@@ -116,20 +143,30 @@ Key question: under what assumptions does this SSIV strategy ``work''?
 	\item $\electricViolet{s_{\ell n}}$ = 10-year lagged employment shares (over total employment)
 	\item $z_\ell$ = predicted growth of import competition
 	\end{itemize}
-\end{itemize}
 \end{frame}
 
 \begin{frame}{SSIV Examples}
-\begin{itemize}
-\item Instrument $z_\ell=\sum_{n} \electricViolet{s_{\ell n}} \sun{g_n}$ for model $y_\ell=\beta x_\ell+\gamma'w_\ell+\varepsilon_\ell$\smallskip
-	\begin{itemize}
-	\item  $\electricViolet{s_{\ell n}}\in[0,1]$ are the \bgElectricViolet{\emph{exposure shares}}; often $\sum_n \electricViolet{s_{\ell n}}=1$ 
-	\smallskip
-	\item $\sun{g_n}$ are the \bgSun{\emph{shocks}} (or ``shifters'')
-	\end{itemize}
-	\bigskip
+\vspace*{-10mm}
+\begin{equation*}
+  \text{Instrument }
+  z_\ell = \sum_{n}
+  \tikz[baseline]{
+      \node[draw=electric-violet,rounded corners,anchor=base] (m1)
+      {$\electricViolet{s_{\ell n}}$};
+      \node[above = 1mm of m1] (l1) {\small\color{electric-violet} shares};
+      \draw[-,electric-violet] (l1) -- (m1);
+  }
+  \tikz[baseline]{
+      \node[draw=sun,rounded corners,anchor=base] (m2)
+      {$\sun{g_n}$};
+      \node[above = 1mm of m2] (l2) {\small\color{sun} shocks};
+      \draw[-,sun] (l2) -- (m2);
+  }
+  \text{ for model }
+  y_\ell = \beta x_\ell + \gamma' w_\ell + \varepsilon_\ell
+\end{equation*}
 
-\item ``Enclave instrument'', e.g. Card (2009) 
+``Enclave instrument'', e.g. Card (2009) 
 	\begin{itemize}
 	\item $\beta$ = inverse elasticity of substitution between native and immigrant labor of some skill level (need a relative labor supply instrument)
 	\item $x_\ell$ and $y_\ell$ = relative employment and wage in region $\ell$\smallskip
@@ -137,38 +174,47 @@ Key question: under what assumptions does this SSIV strategy ``work''?
 	\item $\electricViolet{s_{\ell n}}$ = lagged shares of migrants from origin $n$ in region $\ell$
 	\item $z_\ell$ = share of migrants predicted from enclaves \& recent growth
 	\end{itemize}
-\end{itemize}
 \end{frame}
 
 \begin{frame}{SSIV Examples}
-\begin{itemize}
-\item Instrument $z_\ell=\sum_{n} \electricViolet{s_{\ell n}} \sun{g_n}$ for model $y_\ell=\beta x_\ell+\gamma'w_\ell+\varepsilon_\ell$\smallskip
-	\begin{itemize}
-	\item  $\electricViolet{s_{\ell n}}\in[0,1]$ are the \bgElectricViolet{\emph{exposure shares}}; often $\sum_n \electricViolet{s_{\ell n}}=1$ 
-	\smallskip
-	\item $\sun{g_n}$ are the \bgSun{\emph{shocks}} (or ``shifters'')
-	\end{itemize}
-	\bigskip
+\vspace*{-10mm}
+\begin{equation*}
+  \text{Instrument }
+  z_\ell = \sum_{n}
+  \tikz[baseline]{
+      \node[draw=electric-violet,rounded corners,anchor=base] (m1)
+      {$\electricViolet{s_{\ell n}}$};
+      \node[above = 1mm of m1] (l1) {\small\color{electric-violet} shares};
+      \draw[-,electric-violet] (l1) -- (m1);
+  }
+  \tikz[baseline]{
+      \node[draw=sun,rounded corners,anchor=base] (m2)
+      {$\sun{g_n}$};
+      \node[above = 1mm of m2] (l2) {\small\color{sun} shocks};
+      \draw[-,sun] (l2) -- (m2);
+  }
+  \text{ for model }
+  y_\ell = \beta x_\ell + \gamma' w_\ell + \varepsilon_\ell
+\end{equation*}
 
-\item Hummels et al. (2014) on offshoring: 
+Hummels et al. (2014) on offshoring: 
 	\begin{itemize}
 	\item $x_\ell$ = imports by Danish firm $\ell$, $y_\ell$ = wages
 	\item $\sun{g_n}$ = changes in transport costs by $n = \text{(product, country)}$
 	\item $\electricViolet{s_{\ell n}}$ = lagged import shares
 	\end{itemize}
-\end{itemize}
 \end{frame}
 
 \begin{frame}{What Do We Do With This?}
 
 Of course we can always run IV with such $z_\ell$ ... but what does the corresponding estimand \emph{identify}?
-\bigskip\pause{}
+\bigskip\pause
 
 Recall IV validity condition: $E\left[\frac{1}{L}\sum_\ell z_\ell \varepsilon_\ell\right]=0$ for model residual $\varepsilon_\ell$\smallskip
 \begin{itemize}
 \item Looks a little different than normal because we're not assuming \emph{i.i.d.} sampling, i.e. $E\left[\frac{1}{L}\sum_\ell z_\ell \varepsilon_\ell\right]=E[z_\ell\varepsilon_\ell]$  (you'll see why soon!)
 \end{itemize}
-\bigskip\pause{}
+\bigskip\pause
 
 What properties of shocks and shares make this condition hold?
 \smallskip
@@ -201,48 +247,46 @@ Two Key Problems with OLS estimation:\smallskip
 \vspace{-0.5cm}
 $$\Delta\log Emp_{nt}=\alpha+\beta \Delta IP_{nt}+\varepsilon_{nt}$$
 
-\begin{itemize}
-\item $\Delta IP_{nt}$ is driven by productivity shocks in China, but also potentially by productivity and demand shocks in the US %(+, --, +)
+$\Delta IP_{nt}$ is driven by productivity shocks in China, but also potentially by productivity and demand shocks in the US %(+, --, +)
 \smallskip
 \begin{itemize}
 \item $\varepsilon_{nt}$ captures productivity and demand shocks in the US %(+, +)
 \end{itemize}
-\pause{}\bigskip
-\item AADHP instrument $\Delta IP_{nt}$ with $\Delta IPO_{nt}$, measuring average Chinese import penetration growth in 8 non-US countries\smallskip\pause{}
+
+\pause
+AADHP instrument $\Delta IP_{nt}$ with $\Delta IPO_{nt}$, measuring average Chinese import penetration growth in 8 non-US countries\smallskip\pause
 	\begin{itemize}
 	\item Relevance: both  $\Delta IP_{nt}$ and $\Delta IPO_{nt}$ are driven by the same Chinese productivity shocks
-	\smallskip
 	\item Validity: local productivity/demand shocks in the US are uncorrelated with those of other countries (entering $\Delta IPO_{nt}$)
 	\end{itemize}
-\end{itemize}
 \end{frame}
 
 \begin{frame}{Identification from a Natural Experiment}
 \vspace{-0.2cm}
 Suppose $\Delta IPO_{nt}$ is as-good-as-randomly assigned, as in a RCT: 
-\vspace{-0.3cm}
 \begin{align*}
 E[\Delta IPO_{nt}\mid \mathcal{I]}=\mu\qquad\text{for all }n,t
 \end{align*}
 
-\vspace{-0.3cm}where $\mathcal{I}=\left\{\varepsilon_{nt},\text{pre-trends, balance variables},\dots\right\}$
-\pause{}\smallskip
+where $\mathcal{I}=\left\{\varepsilon_{nt},\text{pre-trends, balance variables},\dots\right\}$
+\pause\bigskip
+
 
 Consistent IV estimation then follows from many observations of $nt$, with sufficiently independent variation in $\Delta IPO_{nt}$
-\pause{}\smallskip
+\end{frame}
 
+\begin{frame}{Identification from a Natural Experiment}
 Can relax to add observables capturing systematic variation:
-\vspace{-0.3cm}
 \begin{align*}
 E[\Delta IPO_{nt}\mid \mathcal{I}]=q_{nt}^\prime\mu\qquad\text{for all }n,t
 \end{align*}
 
-\vspace{-0.3cm}where $q_{nt}$ may include:
+where $q_{nt}$ may include:
 \smallskip
 \begin{itemize}
 \item period FE, isolating within-period variation in the shocks \smallskip
 \item FE of 10 broad sectors, isolating within-sector variation, etc. 
-\end{itemize}\smallskip\pause{}
+\end{itemize}\smallskip\pause
 We would then just want to control for $q_{nt}$ in the industry-level IV
 \end{frame}
 
@@ -251,20 +295,24 @@ We would then just want to control for $q_{nt}$ in the industry-level IV
 Spillovers across different industries are likely important:
 	\begin{itemize}
 	\item When employment  shrinks in industry $n$ after a negative shock, aggregate employment may or may not respond
-	\pause{}\smallskip
+	\pause\smallskip
 	\item In a flexible labor market, comparing wages of similar workers across industries does not make sense
-	%\pause{}\smallskip
+	%\pause\smallskip
 	%\item NILF: not well-defined at the industry level % KB maybe take out of here, somewhat distinct
-	\pause{}\medskip
+	\pause\medskip
 	\end{itemize}
 
+\end{frame}
+
+\begin{frame}{Problem 2: GE Spillovers}
+
 ADH Solution: specify the outcome equation for local labor markets %instead of industries% KB here can connect to two-tier randomization in devt?
-	\begin{itemize}
+\begin{itemize}
 %	\item To have many observations, compare \emph{local} labor market markets
-%	\pause{}\smallskip
-	\item Works if local economies are isolated ``islands'' \\(simple model in Adao-Kolesar-Morales 2019; richer structure of spatial spillovers in Adao-Arkolakis-Esposito 2020)
-	\pause{}\medskip
-	\end{itemize}
+%	\pause\smallskip
+\item Works if local economies are isolated ``islands'' \\(simple model in Adao-Kolesar-Morales 2019; richer structure of spatial spillovers in Adao-Arkolakis-Esposito 2020)
+\pause\medskip
+\end{itemize}
 
 But correct specification is not the same as identification!
 	\begin{itemize}
@@ -276,8 +324,9 @@ But correct specification is not the same as identification!
 
 \subsection{Borusyak et al. (2022)}
 \begin{frame}{Borusyak, Hull, and Jaravel (BHJ; 2022)}
-\vspace{-0.2cm}
+
 Consider the SSIV estimator of $y_\ell=\beta x_\ell+\gamma'w_\ell+\varepsilon_\ell$ instrumented by $z_\ell=\sum_n s_{\ell n}g_n$ and, for now, $\sum_n s_{\ell n}=1$ for all $\ell$
+
 \smallskip
 	\begin{itemize}
 	\item Reduced-form allowed: $x_\ell=z_\ell$ \smallskip
@@ -286,13 +335,19 @@ Consider the SSIV estimator of $y_\ell=\beta x_\ell+\gamma'w_\ell+\varepsilon_\e
 	\item Note: view $g_n$ as stochastic, so can't assume $z_\ell$ is iid
 	\end{itemize}
 
-\medskip\pause{}
+\medskip\pause
 E.g. $g_n= \Delta IPO_{n}$ aggregated w/mfg employment shares $s_{\ell n}$\smallskip
 \begin{itemize}
 \item Can we leverage a natural experiment in $g_n$, as before?
 \end{itemize}
-\medskip\pause{}
+\medskip\pause
+\end{frame}
 
+\begin{frame}{Leveraging $g_n$}{Shift-Share Estimand}
+\vspace{-0.2cm}
+Consider the SSIV estimator of $y_\ell=\beta x_\ell+\gamma'w_\ell+\varepsilon_\ell$ instrumented by $z_\ell=\sum_n s_{\ell n}g_n$ and, for now, $\sum_n s_{\ell n}=1$ for all $\ell$
+
+\vspace{5mm}
 First step: note that by the FWL thm. the estimator can be written
 \begin{align*}
 \hat{\beta}=\frac{\sum_\ell z_\ell y_\ell^\perp}{\sum_\ell z_\ell x_\ell^\perp}=\frac{\sum_\ell \sum_n s_{\ell n}g_n y_\ell^\perp}{\sum_\ell \sum_n s_{\ell n}g_n x_\ell^\perp}
@@ -302,37 +357,65 @@ where $v_\ell^\perp$ denotes sample residuals from regressing $v_\ell$ on $w_\el
 \end{frame}
 
 
-\begin{frame}{BHJ Numerical Equivalence}
+\begin{frame}{Leveraging $g_n$}{BHJ Numerical Equivalence}
 \vspace{-0.2cm}
  BHJ show $\hat{\beta}$ can be obtained from a %just-identified 
-shock-level IV procedure that uses $g_n$ to instrument for a shock-level ``aggregate'' of the treatment:\pause{}
-\begin{align*}
-\hat{\beta}=\frac{\frac{1}{L}\sum_\ell \sum_n s_{\ell n} g_n y_\ell^\perp}{\frac{1}{L}\sum_\ell \sum_n s_{\ell n} g_n x_\ell^\perp}=\pause{}\frac{\sum_n g_n \sum_\ell\frac{1}{L}  s_{\ell n} y_\ell^\perp}{\sum_n g_n\sum_\ell\frac{1}{L}  s_{\ell n}  x_\ell^\perp}=\pause{}\frac{\sum_n s_n g_n \bar{y}_n^\perp}{\sum_n s_n g_n \bar{x}_n^\perp},
-\end{align*}
-where $s_n=\frac{1}{L}\sum_\ell s_{\ell n}$ are weights capturing the average importance of shock $n$, and $\bar{v}_n=\frac{\sum_\ell s_{\ell n} v_\ell}{\sum_\ell s_{\ell n}}$ is an exposure-weighted average of $v_\ell$\medskip\pause{}
+shock-level IV procedure that uses $g_n$ to instrument for a shock-level ``aggregate'' of the treatment:\pause
 
-The residual $\bar\varepsilon_n$ of this shock-level IV procedure is the average residual of observations with a high share of $n$\smallskip
-	\begin{itemize}
-	\item E.g. in ADH, the average unobserved determinants of regional employment in regions most specialized in industry $n$ \medskip\pause{}
-	\end{itemize}
- It follows that $\hat{\beta}$ is consistent iff this shock-level IV procedure is...
+\begin{align*}
+\hat{\beta}=\frac{\frac{1}{L}\sum_\ell \sum_n s_{\ell n} g_n y_\ell^\perp}{\frac{1}{L}\sum_\ell \sum_n s_{\ell n} g_n x_\ell^\perp}=\pause\frac{\sum_n g_n \sum_\ell\frac{1}{L}  s_{\ell n} y_\ell^\perp}{\sum_n g_n\sum_\ell\frac{1}{L}  s_{\ell n}  x_\ell^\perp}=\pause\frac{\sum_n s_n g_n \bar{y}_n^\perp}{\sum_n s_n g_n \bar{x}_n^\perp},
+\end{align*}
+
+\vspace{2.5mm}
+where $s_n=\frac{1}{L}\sum_\ell s_{\ell n}$ are weights capturing the average importance of shock $n$, and $\bar{v}_n=\frac{\sum_\ell s_{\ell n} v_\ell}{\sum_\ell s_{\ell n}}$ is an exposure-weighted average of $v_\ell$\medskip\pause
+\end{frame}
+
+
+\begin{frame}{Leveraging $g_n$}{BHJ Numerical Equivalence}
+\vspace{-7.5mm}
+$$
+\hat{\beta}= \frac{\sum_n s_n g_n \bar{y}_n^\perp}{\sum_n s_n g_n \bar{x}_n^\perp}
+$$
+
+\vspace{2.5mm}
+The IV estimate from the original shock-level IV procedure is equivalent to a ``industry-level'' IV regression with model $\bar{y}_n^\perp = \alpha + \bar{x}_n^\perp \beta + \bar{\epsilon}_n$ instrumented by $g_n$ with weights $s_n$.
+\medskip
+
+The residual $\bar\varepsilon_n$ of this shock-level IV procedure is the average residual of observations with a high share of $n$
+\begin{itemize}
+  \item E.g. in ADH, the average unobserved determinants of regional employment in regions most specialized in industry $n$
+\end{itemize}
+
+\pause
+It follows that $\hat{\beta}$ is consistent iff this shock-level IV procedure is...
 
 \end{frame}
 
 \begin{frame}{BHJ Baseline Assumptions}
+
 \vspace{-0.3cm}
- \textbf{A1} (Quasi-random shock assignment): $E[g_n\mid\bar{\varepsilon},s]=\mu$, $\forall n$\smallskip
+ \textbf{A1} (Quasi-random shock assignment): $E[g_n\mid\bar{\varepsilon},s]=\mu$, for all $ n$
+
 \begin{itemize}
-\item Each shock has the same expected value, conditional on the shock-level unobservables $\bar{\varepsilon}_n$ and average exposure $s_n$\pause{}\smallskip
-\item Implies SSIV exogeneity, as $z_\ell=\mu+\sum_n s_{\ell n}(g_n-\mu)=\mu+\text{``noise''}$ 
-\end{itemize}\medskip\pause{}
- \textbf{A2} (Many uncorrelated shocks): \smallskip
+  \item Each shock has the same expected value, conditional on the shock-level unobservables $\bar{\varepsilon}_n$ and average exposure $s_n$\pause
+
+  \item Implies SSIV exogeneity, as $z_\ell=\mu+\sum_n s_{\ell n}(g_n-\mu)=\mu+\text{``noise''}$ 
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{BHJ Baseline Assumptions}
+\textbf{A2} (Many uncorrelated shocks):
 \begin{itemize}
-\item  $E\left[\sum_n s_n^2\right]\rightarrow 0$: expected Herfindahl index of average shock exposure converges to zero (implies $N\rightarrow \infty$)\smallskip
-\item $Cov(g_n,g_{n^\prime}\mid\bar{\varepsilon},s)=0$ for all $n^\prime\ne n$: shocks are mutually uncorrelated given the unobservables\smallskip\pause{}
-\item Imply a shock-level law of large numbers: $\sum_n s_n g_n\bar{\varepsilon}_n\xrightarrow{p} 0$
-\end{itemize}\medskip\pause{}
- Both assumptions, while novel for SSIV, would be standard for a shock-level IV regression with weights $s_n$ and instrument $g_n$
+  \item  $E\left[\sum_n s_n^2\right]\rightarrow 0$: expected Herfindahl index of average shock exposure converges to zero (implies $N\rightarrow \infty$)
+
+  \item $Cov(g_n,g_{n^\prime}\mid\bar{\varepsilon},s)=0$ for all $n^\prime\ne n$: shocks are mutually uncorrelated given the unobservables
+
+  \pause
+  \item Imply a shock-level law of large numbers: $\sum_n s_n g_n\bar{\varepsilon}_n\xrightarrow{p} 0$
+\end{itemize}\medskip\pause
+ 
+Both assumptions, while novel for SSIV, would be standard for a shock-level IV regression with weights $s_n$ and instrument $g_n$
 
 \end{frame}
 
@@ -341,11 +424,11 @@ The residual $\bar\varepsilon_n$ of this shock-level IV procedure is the average
 \textbf{Conditional Quasi-Random Assignment}: $E[g_n\mid \bar{\varepsilon},q,s]=q_n^\prime \mu$ for some observed shock-level variables $q_n$\smallskip
 \begin{itemize}
 \item Consistency follows when $w_\ell = \sum_n s_{\ell n} q_n$ is controlled for in the IV
-\end{itemize}\medskip\pause{}
+\end{itemize}\medskip\pause
 \textbf{Weakly Mutually Correlated Shocks}: $g_n\mid (\bar{\varepsilon},q,s)$ are clustered or otherwise mutually dependent \smallskip
 \begin{itemize}
 \item Consistency follows when mutual correlation is not too strong
-\end{itemize}\medskip\pause{}
+\end{itemize}\medskip\pause
  \textbf{Estimated Shocks}: $g_n=\sum_\ell w_{\ell n}g_{\ell n}$ proxies for an infeasible $g_n^*$\smallskip
 \begin{itemize}
 \item Consistency may require a ``leave-out'' adjustment: $z_\ell=\sum_\ell s_{\ell n}\tilde{g}_{\ell n}$ for $\tilde{g}_{\ell n}=\sum_{\ell^\prime\neq \ell} \omega_{\ell^\prime n}g_{\ell^\prime n}$ (akin to JIVE solution to many-IV bias) 
@@ -359,9 +442,9 @@ The residual $\bar\varepsilon_n$ of this shock-level IV procedure is the average
 \textbf{Panel Data}: Have $(y_{\ell t},x_{\ell t},s_{\ell n t},g_{n t})$ across $\ell=1,\dots,L$, $t=1,\dots,T$\smallskip
 \begin{itemize}
 \item Consistency can follow from either $N\rightarrow\infty$ or $T\rightarrow\infty$\smallskip
-\item Unit fixed effects ``de-mean'' the shocks, if $s_{\ell n t}$ are time-invariant%\smallskip\pause{}
+\item Unit fixed effects ``de-mean'' the shocks, if $s_{\ell n t}$ are time-invariant%\smallskip\pause
 %\item Also see Jaeger et al. (2019) for dynamic biases in panel SSIVs
-\end{itemize}\medskip\pause{}
+\end{itemize}\medskip\pause
 \textbf{Heterogeneous Effects}: LATE theorem logic goes through
 \begin{itemize}
 \item Under a first-stage monotonicity condition, SSIV identifies a convex weighted average of heterogeneous treatment effects
@@ -369,52 +452,68 @@ The residual $\bar\varepsilon_n$ of this shock-level IV procedure is the average
 
 \end{frame}
 
-\begin{frame}{Practical Consideration 1: Incomplete Sharess}
+\begin{frame}{Practical Consideration 1: Incomplete Shares}{The Problem}
 
-
+\vspace{-5mm}
 So far we have assumed a constant sum-of-shares: $S_\ell\equiv\sum_n s_{\ell n}=1$\smallskip
 \begin{itemize}
 \item But in some settings, $S_\ell$ varies across $\ell$\smallskip
-\item E.g. in ADH, $S_\ell$ is region $\ell$'s share of non-manufacturing emp., since $s_{\ell n}$ is the share of manufacturing industry $n$ in \emph{total} emp.
-\end{itemize}\bigskip\pause{}
- BHJ show that A1/A2 are not enough for validity of $z_\ell$ in this case\smallskip
+\item E.g. in ADH, $S_\ell$ is region $\ell$'s share of non-manufacturing emp.
+\end{itemize}\bigskip\pause
+ BHJ show that \textbf{A1}/\textbf{A2} are not enough for validity of $z_\ell$ in this case\smallskip
 \begin{itemize}
 \item Now $z_\ell=\sum_n s_{\ell n}\left(\mu+(g_n-\mu)\right)=\mu S_\ell+\sum_n s_{\ell n}(g_n-\mu)$\smallskip
 \item So $z_\ell$ is mechanically correlated with $S_\ell$, which may be endogenous 
-\end{itemize}\bigskip\pause{}
- Controlling for the sum-of-shares $S_\ell$ isolates clean shock variation\smallskip
+\end{itemize}
+
+
+E.g. in ADH, Comparing locations with larger and smaller $z_\ell$ could be comparing places with larger manufacturing employment (Midwest vs. South)
+
+\end{frame}
+
+\begin{frame}{Practical Consideration 1: Incomplete Shares}{The Solution}
+
+$$
+z_\ell = \sum_n s_{\ell n}\left(\mu+(g_n-\mu)\right) = \mu S_\ell + \underbrace{\sum_n s_{\ell n}(g_n-\mu)}_{\text{Clean Shock Variation}}
+$$
+
+Controlling for the sum-of-shares $S_\ell$ isolates clean shock variation\smallskip
+
 \begin{itemize}
-\item Further controls are needed when A1 only holds conditional on $q_n$; \\ e.g. in panels, $S_\ell$ should be interacted with time FE
+\item Further controls are needed when \textbf{A1} only holds conditional on $q_n$; \\ e.g. in panels, $S_\ell$ should be interacted with time FE
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Practical Consideration 2: Exposure Clustering}
+\begin{frame}{Practical Consideration 2: Exposure Clustering}{The Problem}
+Ad\~{a}o, Kolesar, and Morales (2019) study a novel inference challenge when SSIV identification leverages quasi-random shocks \smallskip
 
- Ad\~{a}o, Kolesar, and Morales (2019) study a novel inference challenge when SSIV identification leverages quasi-random shocks \smallskip
 \begin{itemize}
-\item Observations with similar shares $s_{\ell 1,},\dots,s_{\ell N}$ are likely to have correlated $z_\ell$, even when not ``clustered'' in conventional ways \\ (e.g. by distance)\smallskip
+\item Observations with similar shares $s_{\ell 1,},\dots,s_{\ell N}$ are likely to have correlated $z_\ell$, even when observations are not ``clustered'' in conventional ways (e.g. by distance)\smallskip
+
 \item When $\varepsilon_\ell$ is similarly clustered (e.g. when $\varepsilon_\ell=\sum_n s_{\ell n}\nu_n +\tilde{\varepsilon}_\ell$), large-sample distribution of $\hat{\beta}$ may not be well-approximated by standard central limit theorems (CLTs)
-\end{itemize}\medskip\pause{}
-They then derive a new CLT + SEs to address ``exposure clustering''\medskip
-	\begin{itemize}
-	\item ``Design-based'': leverage \emph{iid}ness of shocks, not observations
-	\end{itemize}
+\end{itemize}
 \end{frame}
 
-\begin{frame}{Practical Consideration 2: Exposure Clustering}
+\begin{frame}{Practical Consideration 2: Exposure Clustering}{The Solution}
+Ad\~{a}o, Kolesar, and Morales then derive a new CLT + SEs to address ``exposure clustering''\medskip
+\begin{itemize}
+\item ``Design-based'': leverage \emph{iid}ness of shocks, not observations
+\end{itemize}
+\pause\bigskip
+\end{frame}
 
+\begin{frame}{Practical Consideration 2: Exposure Clustering}{The Solution}
 
- BHJ show a convenient solution to exposure clustering:\\
-Usual robust/clustered SEs can be valid when $\hat{\beta}$ is given by estimating
+BHJ use similar logic to show robust/clustered SEs can be valid when $\hat{\beta}$ is given by estimating the `industry-level' regression
 \begin{align*}
 \bar{y}_n^\perp = \alpha+\beta\bar{x}_n^\perp+q_n^\prime\tau+\bar{\varepsilon}_n^\perp,
 \end{align*}
 instrumenting $\bar{x}_n^\perp$ by $g_n$ and weighting by $s_n$
-\smallskip\pause{}
+\smallskip\pause
 \begin{itemize}
 \item Numerically identical IV estimate, when controls include $\sum_n s_{\ell n} q_n$\smallskip
 \item Clustering logic: valid SEs are obtained when estimating the IV at the level of identifying variation (here, shocks)
-\end{itemize}\pause{}
+\end{itemize}\pause
 Same logic applies to performing valid balance/pre-trend tests and evaluating first-stage strength of the instrument\smallskip
 \end{frame}
 
@@ -447,7 +546,7 @@ ADH study the effects of rising Chinese import competition on US commuting zones
 	\item Treatment $x_\ell$: local growth of Chinese imports  in \$1,000/worker (slightly different from AADHP and ADHS)\smallskip
 	\item Main outcome $y_\ell$: local change in manufacturing emp. share
 	\end{itemize}
-	\pause{}\medskip
+	\pause\medskip
 To address endogeneity challenge, use a SSIV $z_{\ell t}=\sum_n s_{\ell nt} g_{nt}$\smallskip
 	\begin{itemize}
 	\item $n$: 397 SIC4 manufacturing industries ($\times$ 2 periods)\smallskip
@@ -457,27 +556,28 @@ To address endogeneity challenge, use a SSIV $z_{\ell t}=\sum_n s_{\ell nt} g_{n
 \end{frame}
 
 \begin{frame}{ADH Revisited}
-\vspace{-0.3cm}
-
- BHJ show how ADH can be seen as leveraging quasi-random shocks\smallskip
-	\begin{itemize}
+BHJ show how ADH can be seen as leveraging quasi-random shocks\smallskip
+\begin{itemize}
 	\item \emph{Ex ante} plausible: imagine random industry productivity shocks in China affecting imports in U.S. \& elsewhere
-	\end{itemize}
-\medskip\pause{}
+\end{itemize}
 
- Evaluate A1 by regional and industry-level balance tests\smallskip
-	\begin{itemize}
+\end{frame}
+
+\begin{frame}{ADH Revisited}{Plausability of \textbf{A1}/\textbf{A2}}
+
+Evaluate \textbf{A1} by regional and industry-level balance tests\smallskip
+\begin{itemize}
 	\item Industry shocks are uncorrelated with observables
-	\end{itemize}
-\medskip\pause{}
+\end{itemize}
 
- Check sensitivity to adjusting for potential industry-level confounders\smallskip
-	\begin{itemize}
+\smallskip\pause
+Check sensitivity to adjusting for potential industry-level confounders:
+\begin{itemize}
 	\item Control for $w_{\ell t}=\sum_n s_{\ell nt} q_{nt}$, where $q_{nt}$ include period FE, sector FE, the Acemoglu et al. (2016) observables, ...
-	\end{itemize}
-\medskip\pause{}
+\end{itemize}
+\medskip\pause
 
- Evaluate A2 by studying variation across industries\smallskip
+Evaluate \textbf{A2} by studying variation across industries\smallskip
 	\begin{itemize}
 	\item Effective sample size (1/HHI of $s_n$ weights): 58-192\smallskip
 	\item Shocks appear mutually uncorrelated across SIC3 sectors
@@ -503,35 +603,41 @@ No significant correlations between shocks and industry observables, controlling
 \subsection{Motivation}
 
 \begin{frame}{The Mariel Boatlift as a Basic SSIV}
-Card (1990) leverages a big migration ``push'' of low-skilled workers from Cuba to Miami, where Cubans historically settled
-\medskip\pause{}
-
-Imagine instrumenting immigrant inflows by the lagged share of Cuban workers $s_{\ell, \text{Cuba}}$ in a diff-in-diff setup\smallskip
-	\begin{itemize}
+Card (1990) leverages a big migration ``push'' of low-skilled workers from Cuba to Miami, a Cuban-enclave. \pause 
+Imagine instrumenting immigrant inflows by the lagged share of Cuban workers $s_{\ell, \text{Cuba}}$ in a diff-in-diff setup
+\begin{itemize}
 	\item Need parallel trends: regions with more/fewer Cuban workers on similar employment trends
-	\medskip\pause{}
-	\end{itemize}	
-This can be viewed as a simple shift-share instrument: $$s_{\ell, \text{Cuba}}\equiv s_{\ell,\text{Cuba}}\cdot 1+\sum_{n\ne\text{Cuba}} s_{\ell n}\cdot 0$$
-\pause{}
+\end{itemize}	
 
-\vspace{-0.4cm}If several migration origins had a push shock, we can pool them together with a more traditional SSIV...
+This can be viewed as a simple shift-share instrument: 
+\vspace{-4mm}
+$$s_{\ell, \text{Cuba}}\equiv s_{\ell,\text{Cuba}}\cdot 1+\sum_{n\ne\text{Cuba}} s_{\ell n}\cdot 0$$
+\vspace{-6mm}\pause
+
+If several migration origins had a push shock, we can pool them together with a more traditional SSIV...
 
 \end{frame}
 
 \subsection{Goldsmith-Pinkham et al. (2020)}
+
 \begin{frame}{Goldsmith-Pinkham, Sorkin, and Swift (GPSS; 2020)} 
 
  GPSS view the set of $n$ and values of $g_n$ as fixed, so $z_\ell=\sum_n s_{\ell n} g_n$ is a linear combination of shares
-\medskip\pause{}
+\medskip\pause
 
 They then also establish a numerical equivalence:
 $\hat{\beta}$ can be obtained from an overidentified IV procedure that uses $N$ share instruments $s_{\ell n}$ and a weight matrix based on the shocks $g_n$
-\medskip\pause{}
 
-Sufficient identifying assumption: shares $s_{\ell n}$ are exogenous for each $n$ (like parallel trends when $\varepsilon_\ell$ are unobserved trends)\smallskip
+
+
+\end{frame}
+
+\begin{frame}{Goldsmith-Pinkham, Sorkin, and Swift (GPSS; 2020)} 
+
+Sufficient identifying assumption: shares $s_{\ell n}$ are exogenous for each $n$ (like parallel trends when $\varepsilon_\ell$ are unobserved trends)
 \begin{align*}
-E[\varepsilon_\ell\mid s_{\ell n}]=0,\text{ }\forall n \pause{}\implies E[\sum_\ell\nolimits z_\ell\varepsilon_\ell]=\sum_\ell\sum_n g_nE[s_{\ell n]E[\varepsilon_\ell\mid s_{\ell n}}]=0
-\end{align*}\pause{}\vspace{-0.4cm}
+E[\varepsilon_\ell\mid s_{\ell n}]=0,\text{ }\forall n \pause\implies E[\sum_\ell\nolimits z_\ell\varepsilon_\ell]=\sum_\ell\sum_n g_nE[s_{\ell n}]E[\varepsilon_\ell\mid s_{\ell n}]=0
+\end{align*}
 
 This is $N$ moment conditions at the level of observations, e.g. 38 for Card and 397 for ADH (vs. just 1 in BHJ, at the level of industries)
 
@@ -539,15 +645,19 @@ This is $N$ moment conditions at the level of observations, e.g. 38 for Card and
 
 \begin{frame}{Rotemberg Weights}
 
+\vspace{-0.3cm}
 How does SSIV pool different diff-in-diffs?
 \medskip
+
 \begin{itemize}
-\item GPSS propose ``opening the black box'' of overidentified IV by deriving the weights SSIV implicitly puts on each share instrument\smallskip
-\item Builds on Rotemberg (1983), so they call these ``Rotemberg weights''
+  \item GPSS propose ``opening the black box'' of overidentified IV by deriving the weights SSIV implicitly puts on each share instrument\smallskip
+  \item Builds on Rotemberg (1983), so they call these ``Rotemberg weights''
 \end{itemize}
 \begin{align*}
 \hat{\beta}=\sum_n \hat{\alpha}_n\hat{\beta}_n\text{, where }\underbrace{\hat{\beta}_n=\frac{\sum_\ell s_{\ell n}y_\ell^\perp}{\sum_\ell s_{\ell n}x_\ell^\perp}}_{\text{$n$-specific IV estimate}}\text{ and }\underbrace{\hat{\alpha}_n=\frac{g_n\sum_\ell s_{\ell n}x_\ell^\perp}{\sum_{n^\prime}g_{n^\prime}\sum_\ell s_{\ell n^\prime}x_\ell^\perp}}_{\text{Rotemberg weight}}
-\end{align*}\medskip\pause{}\vspace{-0.2cm}
+\end{align*}
+\pause
+
 Intuitively, more weight is given to share instruments with more extreme shocks $g_n$ and larger first stages $\sum_\ell s_{\ell n}x_\ell^\perp$\smallskip
 \begin{itemize}
 \item Weights can be negative (potential issue w/heterogeneous effects)
@@ -563,17 +673,19 @@ Intuitively, more weight is given to share instruments with more extreme shocks 
 
 \begin{frame}{Is Share Exogeneity Plausible?}
 
+Share exogeneity assumption is \textbf{not} that ``shares don't causally respond to the residual'' (they can't: shares are pre-determined)
 
- Share exogeneity assumption is \textbf{not} that ``shares don't causally respond to the residual'' (they can't: shares are pre-determined)
-	\begin{itemize}
+\begin{itemize}
 	\item It's: ``all unobservables are uncorrelated with anything about the local share distribution''
-	\end{itemize}\bigskip\pause{}
+\end{itemize}
 
-%\item In some settings, it's difficult to make an \emph{ex ante} case\smallskip\pause{} 
+\end{frame}
+
+\begin{frame}{Is Share Exogeneity Plausible?}
 This sufficient condition is typically violated when there are \emph{any} unobserved shocks $\nu_n$ that affect $\varepsilon_\ell$ via the same or correlated shares
 \smallskip
 	\begin{itemize}
-	%\item Suppose unobserved shocks $\nu_n$ affect $\varepsilon_\ell$ via the same/correlated shares\smallskip\pause{}
+	%\item Suppose unobserved shocks $\nu_n$ affect $\varepsilon_\ell$ via the same/correlated shares\smallskip\pause
 	\item %Share exogeneity is \emph{ex ante} implausible: 
 	I.e. if $\varepsilon_\ell=\sum_n s_{\ell n}\nu_n+\tilde{\varepsilon}_\ell$, then $s_{\ell n}$ and $\varepsilon_\ell$ cannot be uncorrelated in large samples---even if $\nu_n$ are uncorelated with $g_n$\smallskip
 	\item E.g. in ADH, unobserved technology shocks across industries affect labor markets via lagged emp. shares, along with observed $g_n$\smallskip
@@ -584,12 +696,13 @@ This sufficient condition is typically violated when there are \emph{any} unobse
 \begin{frame}{Card and ADH Revisited}
 
 When share exogeneity is \emph{ex ante} plauible, can test its assumptions \emph{ex post} (focusing on high Rotemberg weight $n$):\smallskip
+
 \begin{itemize}
 \item Balance/pre-trend tests
 \item Overidentification tests (under constant effects)\smallskip
 \item Straightforward to implement; no different than any other IV\smallskip
 \end{itemize}
-\bigskip\pause{}
+\bigskip\pause
 
 GPSS find that balance/overidentification tests broadly pass for Card
 
@@ -599,41 +712,48 @@ GPSS find that balance/overidentification tests broadly pass for Card
 \section{Choosing an Appropriate Framework}
 
 \begin{frame}{A Taxonomy of SSIV Settings}
-\vspace{-0.3cm}
-BHJ distinguish between three cases of SSIVs in the literature\medskip\pause{}
 
+\vspace{-4mm}
+{\small
+\bgPictonBlue{\textbf{Case 1}} the IV is based on a set of shocks which can be thought of as an instrument (i.e. many, plausibly quasi-randomly assigned)
 \begin{itemize}
-\item \textbf{Case 1}: the IV is based on a set of shocks which can be thought of as an instrument (i.e. many, plausibly quasi-randomly assigned)\smallskip
-\begin{itemize}
-\item BHJ shows how this identifying variation can be mapped to estimate effects at a different ``level'' (i.e. industries $\rightarrow$ local labor markets)
-\end{itemize}\medskip\pause{}
-\item \textbf{Case 2}: the researcher does not directly observe many quasi-random shocks, but can estimate them in-sample\smallskip
-\begin{itemize}
-\item Canonical setting of Bartik (1991), where $g_n$ are average industry growth rates (thought to proxy for latent demand shocks)\smallskip
-\item See also Card (2009), where national immiration rates are estimated
-\end{itemize}\medskip\pause{}
-\item \textbf{Case 3}: the $g_n$ cannot be naturally viewed as an instrument\smallskip
-\begin{itemize}
-\item Either too few or implausibly exogenous, even given some $q_n$\smallskip
-\item Identification may (or may not) instead follow from share exogeneity
+  \item BHJ shows how this identifying variation can be mapped to estimate effects at a different ``level'' (i.e. industries $\rightarrow$ local labor markets)
 \end{itemize}
+
+\pause
+\bgPictonBlue{\textbf{Case 2}} the researcher does not directly observe many quasi-random shocks, but can estimate them in-sample
+\begin{itemize}
+  \item Canonical setting of Bartik (1991), where $g_n$ are average industry growth rates (thought to proxy for latent demand shocks)
+  \item See also Card (2009), where national immiration rates are estimated
 \end{itemize}
+
+\pause
+\bgPictonBlue{\textbf{Case 3}} the $g_n$ cannot be naturally viewed as an instrument
+\begin{itemize}
+  \item Either too few or implausibly exogenous, even given some $q_n$.
+  \item Identification may (or may not) instead follow from share exogeneity
+\end{itemize}
+}
+
+
 
 \end{frame}
 
 \begin{frame}{Ex Ante vs. Ex Post Validity}
 
- BHJ emphasize that the decision to pursue a ``shocks'' vs. ``shares'' identification strategy must be made \emph{ex ante}\smallskip
-	\begin{itemize}
+
+\vspace{-4mm}
+BHJ emphasize that the decision to pursue a ``shocks'' vs. ``shares'' identification strategy must be made \emph{ex ante}
+\begin{itemize}
 	\item Undesirable to base identifying assumptions on \emph{ex post} tests, though balance/pre-trend tests can be used to falsify assumptions\smallskip
 	\item The two identification strategies have different economic content 
-	\end{itemize}\medskip\pause{}
+\end{itemize}\medskip\pause
 
-They suggest thinking about whether shares are ``tailored'' to the economic question/treatment, or are ``generic''\smallskip
-	\begin{itemize}
+They suggest thinking about whether shares are ``tailored'' to the economic question/treatment, or are ``generic''
+\begin{itemize}
 	\item Generic shares (e.g. ADH): unobserved $\nu_n$ are likely to enter $\varepsilon_\ell$ via the same or similar shares, violating share exogeneity\smallskip
 	\item Tailored shares have a diff-in-diff feel; don't even need the shocks, except to possibly improve power or avoid many-IV bias
-	\end{itemize}
+\end{itemize}
 
 \end{frame}
 
