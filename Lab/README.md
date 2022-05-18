@@ -11,7 +11,7 @@ This lab will walk through some basic SSIV analyses using data from [Autor, Dorn
 
 ## Exercises:
 
-1. Construct the ADH (location-by-year) instrument by appropriately combining the data on shocks and shares. Merge this into the `adh_noIV` dataset, and estimate an IV regression of the outcome onto the treatment which controls for year (i.e. the `post` variable) and weights by baseline total employment (the `weight` variable), clustering by `state`. Then estimate the exact same IV regression replacing the outcome `y` with the lagged outcome `y_lag`, capturing growth in manufacturing employment that took place before the ADH "China Shock" quasi-experiment. Comment on the difference in the two IV regression coefficients.
+1. Construct the ADH (location-by-year) instrument by appropriately combining the data on shocks and shares. Merge this into the `adh_noIV` dataset, and estimate an IV regression of the outcome onto the treatment which controls for year (i.e. the `post` variable) and weights by baseline total employment (the `weight` variable), clustering by `state`. Then estimate the exact same IV regression replacing the outcome `y` with the lagged outcome `y_lag`, capturing growth in manufacturing employment that took place before the ADH "China Shock" quasi-experiment. How does the latter IV regression help build support for the former IV regression?
 
 *Main IV Estimate:*                      
 *Standard Error:*
@@ -24,7 +24,7 @@ This lab will walk through some basic SSIV analyses using data from [Autor, Dorn
 
 
 
-2.  Construct the "sum-of-shares" control from the `adh_shares` dataset and add this control to both of the previous IV regressions. Comment on how the main IV estimate changes.
+2.  Construct the "sum-of-shares" control from the `adh_shares` dataset and add this control to both of the previous IV regressions. How does the main IV estimate change? Why, intuitively, is this control important to include?
 
 *Main IV Estimate:*                      
 *Standard Error:*
@@ -34,7 +34,7 @@ This lab will walk through some basic SSIV analyses using data from [Autor, Dorn
 
 *Comments:*
 
-3.  Interact the "sum-of-shares" control with year and add this control to both of the previous IV regressions. Comment on how both IV estimates change. Can you see why the interaction control is important?
+3.  Interact the "sum-of-shares" control with year and add this control to both of the previous IV regressions. How do both IV estimates change? Can you see why, intuitively, the interaction control shifts the main IV estimate so much?
 
 *Main IV Estimate:*                      
 *Standard Error:*
@@ -51,5 +51,3 @@ This lab will walk through some basic SSIV analyses using data from [Autor, Dorn
 
 *Lag Outcome IV Estimate:*               
 *Standard Error:*
-
-*Comments:*

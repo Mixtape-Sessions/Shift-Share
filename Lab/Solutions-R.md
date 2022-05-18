@@ -30,8 +30,9 @@ setup:
     variable), clustering by `state`. Then estimate the exact same IV
     regression replacing the outcome `y` with the lagged outcome
     `y_lag`, capturing growth in manufacturing employment that took
-    place before the ADH “China Shock” quasi-experiment. Comment on the
-    difference in the two IV regression coefficients.
+    place before the ADH “China Shock” quasi-experiment. How does the
+    latter IV regression help build support for the former IV
+    regression?
 
 ``` r
 ## Example solutions for SSIV Lab
@@ -132,17 +133,21 @@ df |>
     F-test (1st stage), x: stat = 1,146.1, p < 2.2e-16 , on 1 and 1,441 DoF.
                Wu-Hausman: stat =    11.2, p = 8.305e-4, on 1 and 1,440 DoF.
 
-*Main IV Estimate:*  
-*Standard Error:*
-
-*Lag Outcome IV Estimate:*  
-*Standard Error:*
-
 *Comments:*
 
+The lag outcome IV estimate is much smaller than the main IV estimate
+(-0.131 vs -0.746) and statistically insignificant. This tells us that
+regions which would get a large “china shock” in the post period are not
+on differential outcome trends in the pre period, building support for
+the validity of the instrument. To do this comparison properly we should
+use exposure-robust standard errors, i.e. by the ssaggregate command
+used below. But as you’ll see below the standard errors are not too
+different this way.
+
 2.  Construct the “sum-of-shares” control from the `adh_shares` dataset
-    and add this control to both of the previous IV regressions. Comment
-    on how the main IV estimate changes.
+    and add this control to both of the previous IV regressions. How
+    does the main IV estimate change? Why, intuitively, is this control
+    important to include?
 
 ``` r
 # Add sum of shares control
@@ -208,18 +213,19 @@ df |>
     F-test (1st stage), x: stat = 646.1     , p < 2.2e-16 , on 1 and 1,440 DoF.
                Wu-Hausman: stat =   0.138437, p = 0.709894, on 1 and 1,439 DoF.
 
-*Main IV Estimate:*  
-*Standard Error:*
-
-*Lag Outcome IV Estimate:*  
-*Standard Error:*
-
 *Comments:*
 
+The sum-of-shares control should be included because ADH is a setting
+with “incomplete shares” (i.e. the sum of shares I not constant across
+location-years). Without this control the SSIV will be using both the
+variation in shocks across industries and the average “size” of the
+shock through the sum of shares (unless the shocks are mean-zero, which
+you can see they are not).
+
 3.  Interact the “sum-of-shares” control with year and add this control
-    to both of the previous IV regressions. Comment on how both IV
-    estimates change. Can you see why the interaction control is
-    important?
+    to both of the previous IV regressions. How do both IV estimates
+    change? Can you see why, intuitively, the interaction control shifts
+    the main IV estimate so much?
 
 ``` r
 # SSIV with Sum of Shares x Year
@@ -285,13 +291,17 @@ adh_shocks |>
     Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
     RMSE: 28.0   Adj. R2: 0.046361
 
-*Main IV Estimate:*  
-*Standard Error:*
-
-*Lag Outcome IV Estimate:*  
-*Standard Error:*
-
-*Comments:*
+*Comments:* Interacting the sum-of-shares control with year isolates the
+within-year variation in shocks. To see this take the year fixed effects
+as the industry-level “q_n” discussed in class and note that to leverage
+this control we need to control for sum_n (s_lnt*q_n) = sum_nt
+(s_ln)*period_t in the location-year regression. You can see that the
+shock mean is quite different across periods (in the post period the
+average shock is significantly larger) such that isolating the
+within-period variation makes a difference – without this control the
+SSIV is using both within- and across-period shock variation, and the
+economic conditions in the two periods are quite different (causing
+OVB).
 
 4.  Use the *ssaggregate* command to run both of the previous IV
     regressions at the shock level. You should control for year fixed
@@ -354,11 +364,3 @@ ssagg_df |>
                      Within R2: 0.004348
     F-test (1st stage), x: stat = 154.8    , p < 2.2e-16 , on 1 and 791 DoF.
                Wu-Hausman: stat =   0.63358, p = 0.426284, on 1 and 790 DoF.
-
-*Main IV Estimate:*  
-*Standard Error:*
-
-*Lag Outcome IV Estimate:*  
-*Standard Error:*
-
-*Comments:*

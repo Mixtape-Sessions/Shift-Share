@@ -30,8 +30,9 @@ setup:
     variable), clustering by `state`. Then estimate the exact same IV
     regression replacing the outcome `y` with the lagged outcome
     `y_lag`, capturing growth in manufacturing employment that took
-    place before the ADH “China Shock” quasi-experiment. Comment on the
-    difference in the two IV regression coefficients.
+    place before the ADH “China Shock” quasi-experiment. How does the
+    latter IV regression help build support for the former IV
+    regression?
 
 ``` stata
 /*****************************************/
@@ -161,17 +162,21 @@ ivreg2 y_lag (x=z) post [aw=weight], cluster(state)
     Excluded instruments: z
     ------------------------------------------------------------------------------
 
-*Main IV Estimate:*  
-*Standard Error:*
-
-*Lag Outcome IV Estimate:*  
-*Standard Error:*
-
 *Comments:*
 
+The lag outcome IV estimate is much smaller than the main IV estimate
+(-0.131 vs -0.746) and statistically insignificant. This tells us that
+regions which would get a large “china shock” in the post period are not
+on differential outcome trends in the pre period, building support for
+the validity of the instrument. To do this comparison properly we should
+use exposure-robust standard errors, i.e. by the ssaggregate command
+used below. But as you’ll see below the standard errors are not too
+different this way.
+
 2.  Construct the “sum-of-shares” control from the `adh_shares` dataset
-    and add this control to both of the previous IV regressions. Comment
-    on how the main IV estimate changes.
+    and add this control to both of the previous IV regressions. How
+    does the main IV estimate change? Why, intuitively, is this control
+    important to include?
 
 ``` stata
 /* Add sum of shares control */
@@ -185,8 +190,8 @@ merge 1:1 location year using `sum_shares', nogen
 summ sum_share
 ```
 
-    (note: file /var/folders/m3/fzql5frx44nbt7v3j41h6l440000gn/T//S_13044.000002 not found)
-    file /var/folders/m3/fzql5frx44nbt7v3j41h6l440000gn/T//S_13044.000002 saved
+    (note: file /var/folders/m3/fzql5frx44nbt7v3j41h6l440000gn/T//S_23416.000002 not found)
+    file /var/folders/m3/fzql5frx44nbt7v3j41h6l440000gn/T//S_23416.000002 saved
 
         Result                           # of obs.
         -----------------------------------------
@@ -296,18 +301,19 @@ ivreg2 y_lag (x=z) post sum_share [aw=weight], cluster(state)
     Excluded instruments: z
     ------------------------------------------------------------------------------
 
-*Main IV Estimate:*  
-*Standard Error:*
-
-*Lag Outcome IV Estimate:*  
-*Standard Error:*
-
 *Comments:*
 
+The sum-of-shares control should be included because ADH is a setting
+with “incomplete shares” (i.e. the sum of shares I not constant across
+location-years). Without this control the SSIV will be using both the
+variation in shocks across industries and the average “size” of the
+shock through the sum of shares (unless the shocks are mean-zero, which
+you can see they are not).
+
 3.  Interact the “sum-of-shares” control with year and add this control
-    to both of the previous IV regressions. Comment on how both IV
-    estimates change. Can you see why the interaction control is
-    important?
+    to both of the previous IV regressions. How do both IV estimates
+    change? Can you see why, intuitively, the interaction control shifts
+    the main IV estimate so much?
 
 ``` stata
 /* Interact sum of shares with year */
@@ -437,13 +443,19 @@ restore
            _cons |  -2486.937   343.7704    -7.23   0.000     -3162.78   -1811.094
     ------------------------------------------------------------------------------
 
-*Main IV Estimate:*  
-*Standard Error:*
-
-*Lag Outcome IV Estimate:*  
-*Standard Error:*
-
 *Comments:*
+
+Interacting the sum-of-shares control with year isolates the within-year
+variation in shocks. To see this take the year fixed effects as the
+industry-level “q_n” discussed in class and note that to leverage this
+control we need to control for sum_n (s_lnt*q_n) = sum_nt
+(s_ln)*period_t in the location-year regression. You can see that the
+shock mean is quite different across periods (in the post period the
+average shock is significantly larger) such that isolating the
+within-period variation makes a difference – without this control the
+SSIV is using both within- and across-period shock variation, and the
+economic conditions in the two periods are quite different (causing
+OVB).
 
 4.  Use the *ssaggregate* command to run both of the previous IV
     regressions at the shock level. You should control for year fixed
@@ -565,11 +577,3 @@ ivreg2 y_lag (x=shock) i.year [aw=s_n], cluster(industry)
     Included instruments: 2000.year
     Excluded instruments: shock
     ------------------------------------------------------------------------------
-
-*Main IV Estimate:*  
-*Standard Error:*
-
-*Lag Outcome IV Estimate:*  
-*Standard Error:*
-
-*Comments:*
