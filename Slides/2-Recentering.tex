@@ -34,7 +34,7 @@ Many treatments/instruments are SSIV-like: combining multiple sets of variation,
 How can we just leverage the \bgSun{exogenous shocks} to such $z_i$?
 \end{frame}
 
-\begin{frame}{Borusyak and Hull (BH, 2022) Key Points}
+\begin{frame}{Borusyak and Hull (BH, 2022): Main Points}
   
   {\small 
   \vspace{-3mm}
@@ -208,8 +208,26 @@ Recentered MA is a valid instrument for realized MA growth
 		\vspace{0.1cm}
 		\begin{itemize}  
 		\item Compares MA from actual and counterfactual shocks 
+		\item As it turns out, we can also control for expected MA growth
 		\end{itemize}
 \end{frame}
+
+\begin{frame}{Linear SSIV Redux}
+
+Classic SSIV is a special case where $z_i=\sum_n \electricViolet{s_{in}}\sun{g_n}$ is linear in the exogenous shocks\pause{}
+\medskip
+
+The expected instrument is $\mu_i=E\left[\sum_n\electricViolet{s_{in}}\sun{g_n}\mid \electricViolet{s}\right]=\sum_n\electricViolet{s_{in}} E\left[\sun{g_n}\mid \electricViolet{s}\right]$\smallskip\pause{}
+
+\begin{itemize}
+\item If $E\left[\sun{g_n}\mid \electricViolet{s}\right]=\gamma$, we need to adjust for $\gamma\left(\sum_n\electricViolet{s_{in}}\right)$\pause{}
+\item Linear in the sum-of-shares $S_i=\sum_n\electricViolet{s_{in}}$; it turns out controlling for this observable is enough (recall FWL theorem!)\pause{}
+\item If $\sun{g_n}$ is only exogenous conditional on $\electricViolet{q_n}$, with $E\left[\sun{g_n}\mid \electricViolet{s,q}\right]=\electricViolet{q_n}^\prime\gamma$, we need to adjust for $\sum_n\electricViolet{s_{in}} E\left[\sun{g_n}\mid \electricViolet{s,q}\right]=\gamma\left(\sum_n\electricViolet{s_{in}q_n}\right)$\pause{}
+\item Controlling for $\sum_n\electricViolet{s_{in}q_n}$ is enough (sound familiar?) 
+\end{itemize}
+
+\end{frame}
+
 
 \subsection{Medicaid Eligibility Effects}
 \begin{frame}{Example 2: Effects of Program Eligibility}
@@ -223,10 +241,10 @@ where $x_i$ is determined by $i$'s state policy ${\color<2->{sun}g}{}_{\color<3-
 	\item But \bgElectricViolet{pre-determined demographics} are endogeous $\Rightarrow$ OLS biased
 	\end{itemize}
 \vspace{0.3cm}\pause
-Standard ``simulated instruments'' solution (Currie and Gruber (1996)): \\ use state-level variation (a measure of policy generosity) as IV for $x_i$ 
+Standard ``simulated instruments'' solution (Currie and Gruber (1996)): \\ use state-level variation (avgerage policy generosity across a ``simulated'' group of individuals) as a single IV for $x_i$ 
 
 \begin{itemize}
-\item This works, but is likely inefficient: policy shocks have heterogeneous effects across individuals
+\item This works, but is likely inefficient: the policy shocks likely have heterogeneous effects across individuals w/different demos
 \end{itemize}
 \end{frame}
 
@@ -235,7 +253,6 @@ Consider the effects of individual eligilibity $x_i$ for Medicaid:
 $$y_i=\beta x_i+\varepsilon_i$$ 
 where $x_i$ is determined by $i$'s state policy ${\color{sun}g}{}_{\color{electric-violet}\text{state}_i}$ and {\color{electric-violet}demographics}\pause
 
-\pause
 The BH approach:
 \vspace{0.05cm}
 	\begin{itemize}
@@ -259,7 +276,7 @@ The BH approach:
 \vspace{-0.2cm}
 We have a model of $y_i=\beta x_i+\varepsilon_i $ for a fixed population $i=1\dots N$
 \begin{itemize}
-\item In BH: extensions to heterogeneous effects, other controls, multiple treatments, nonlinear outcome models, panel data...
+\item In the paper: extensions to heterogeneous effects, other controls, multiple treatments, nonlinear outcome models, panel data...
 \end{itemize}
 
 \pause
@@ -320,7 +337,7 @@ We have a candidate instrument $z_i = f_i ({\color{sun}g},{\color{electric-viole
 
 \subsection{Market Access Effects}
 \begin{frame}[label=HSRApplication]{App. 1: Market Access from Chinese High-Speed Rail}
-	We first show how instrument recentering can address OVB when estimating the effects of market access growth
+	BH first show how instrument recentering can address OVB when estimating the effects of market access growth
 	
 	\vspace{0.4cm}
 	\textbf{Setting}: Chinese HSR; 83 lines built 2008--2016, 66 yet unbuilt
@@ -450,8 +467,8 @@ Via non-random variation, recentered IV has $\approx 3$ times smaller SEs
 In both linear SSIV and more elaborate settings, the most important thing is to decide \emph{ex ante} what identifying variation you want to use\smallskip\pause
 \begin{itemize}
 \item When leveraging a natural experiment, recentering (e.g. controlling for sum-of-shares, in linear SSIV) can help\smallskip\pause
-\item Non-experimental assumptions (e.g. parallel trends) typically require other approaches \smallskip
-\item The source of variation can guide inference considerations
+\item Non-experimental assumptions (e.g. parallel trends) typically require other approaches\pause{} \smallskip
+\item The source of variation can (should?) guide inference 
 \end{itemize}\medskip\pause
 
 After deciding + appropriately adjusting the analysis, try to falsify the identifying variation (\emph{ex post}) -- via balance or pre-trend tests\bigskip\pause
