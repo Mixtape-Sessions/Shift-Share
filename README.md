@@ -5,7 +5,7 @@
 
 Shift-Share Instrumental Variables (SSIV) are used to address endogeneity and selection challenges in many economic settings. This half-day workshop will introduce the basics of SSIV and cover the recent literature on its econometric foundations. Special focus will be paid on the different assumptions underlying the “exogenous shares” and “exogenous shocks” approaches to SSIV identification, and their practical implications. We will also cover a more general class of instrumental variable strategies combining exogenous shocks and non-random exposure. Group programming exercises will be used to illustrate various theoretical concepts in real-world applications.
 
-### Schedule 
+![About This Workshop](img/readme_schedule.png)
 
 1. Introduction
 2. The “Exogenous Shocks” Approach (Borusyak et al., 2022)
