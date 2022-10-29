@@ -98,7 +98,7 @@
 
 
 \bar under
-Shift-Share IV: A One-Day Workshop
+Shift-Share IV: A Two-Day Workshop
 \bar default
 
 \begin_inset space \hfill{}
@@ -245,11 +245,11 @@ Course Description
 \begin_layout Standard
 Shift-Share Instrumental Variables (SSIV) are used to address endogeneity
  and selection challenges in many economic settings.
- This one-day workshop will introduce the basics of SSIV and cover the recent
+ This two-day workshop will introduce the basics of SSIV and cover the recent
  literature on its econometric foundations.
  Special focus will be paid on the different assumptions underlying the
  “exogenous shares” and “exogenous shocks” approaches to SSIV identification,
- and their practical implications.
+ along with their practical implications.
  We will also cover a more general class of instrumental variable strategies
  combining exogenous shocks and non-random exposure.
  Group programming exercises will be used to illustrate various theoretical
@@ -316,22 +316,22 @@ Course Structure
 \end_layout
 
 \begin_layout Standard
-This is a one-day (4 hour) intensive workshop, with 3 hours of lectures
- and one 45-minute coding lab.
+This is a two-day (6 hour) intensive workshop, with 4 hours of lectures
+ and one 70-minute coding lab.
  The remaining time will be given to breaks.
- The coding labs will involve 25 minutes of self- or group-paced work and
- 20 minutes of solution live-coding.
+ The coding labs will involve 40 minutes of self- or group-paced work and
+ 30 minutes of solution live-coding.
 \end_layout
 
 \begin_layout Standard
 
 \series bold
-Schedule
+Schedule (all times ET)
 \end_layout
 
 \begin_layout Standard
 \begin_inset Tabular
-<lyxtabular version="3" rows="6" columns="3">
+<lyxtabular version="3" rows="11" columns="3">
 <features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
@@ -341,7 +341,7 @@ Schedule
 \begin_inset Text
 
 \begin_layout Plain Layout
-Saturday 5/21
+Wednesday 11/2
 \end_layout
 
 \end_inset
@@ -350,7 +350,7 @@ Saturday 5/21
 \begin_inset Text
 
 \begin_layout Plain Layout
-1:00-2:30pm
+6:00-7:00pm
 \end_layout
 
 \end_inset
@@ -359,7 +359,7 @@ Saturday 5/21
 \begin_inset Text
 
 \begin_layout Plain Layout
-Lecture 1: Linear SSIV – Exogenous Shares and Shocks
+Lecture 1: Linear SSIV – Part 1
 \end_layout
 
 \end_inset
@@ -379,7 +379,7 @@ Lecture 1: Linear SSIV – Exogenous Shares and Shocks
 \begin_inset Text
 
 \begin_layout Plain Layout
-2:30-2:35pm
+7:00-7:10pm
 \end_layout
 
 \end_inset
@@ -410,7 +410,7 @@ Break
 \begin_inset Text
 
 \begin_layout Plain Layout
-2:35-3:20pm
+7:10-8:10pm
 \end_layout
 
 \end_inset
@@ -419,7 +419,7 @@ Break
 \begin_inset Text
 
 \begin_layout Plain Layout
-Coding Lab: Autor, Dorn, and Hanson (2013)
+Lecture 2: Linear SSIV – Part 2
 \end_layout
 
 \end_inset
@@ -439,7 +439,7 @@ Coding Lab: Autor, Dorn, and Hanson (2013)
 \begin_inset Text
 
 \begin_layout Plain Layout
-3:20-3:25pm
+8:10-8:20pm
 \end_layout
 
 \end_inset
@@ -470,7 +470,7 @@ Break
 \begin_inset Text
 
 \begin_layout Plain Layout
-3:25-4:55pm
+8:20-9:00pm
 \end_layout
 
 \end_inset
@@ -479,7 +479,36 @@ Break
 \begin_inset Text
 
 \begin_layout Plain Layout
-Lecture 2: Nonlinear SSIV and Beyond – Instrument Recentering
+Coding Lab: Solo/Group Work
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Thursday 11/3
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6:00-6:30pm
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Coding Lab: Solutions Live-Coding 
 \end_layout
 
 \end_inset
@@ -499,7 +528,127 @@ Lecture 2: Nonlinear SSIV and Beyond – Instrument Recentering
 \begin_inset Text
 
 \begin_layout Plain Layout
-4:55-5:00pm
+6:30-6:40pm
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\emph on
+Break
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6:40-7:40pm
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Lecture 3: Recentered IV – Part 1
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+7:40-7:50pm
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\emph on
+Break
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+7:50-8:50pm
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Lecture 4: Recentered IV – Part 2
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8:50-9:00pm
 \end_layout
 
 \end_inset
